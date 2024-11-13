@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Setup Instructions
 
-## Getting Started
+The guide to set up this project on your machine.
 
-First, run the development server:
+## Prerequisites
+
+- Ensure you have the above tools installed on your system:
+- **Node.js**: [Download here](https://nodejs.org/).
+- **Git**: [Download here](https://git-scm.com/downloads).
+- **GitHub CLI (gh)**: [Download here](https://cli.github.com/).
+
+> **Note**: Make sure to check that each tool is successfully installed by running the following commands:
+>
+> - `node -v`
+> - `git --version`
+> - `gh --version`
+
+## Step 1: Set Up GitHub Access
+
+1. Open your command line.
+2. Authenticate with GitHub by running:
+
+   ```bash
+   gh auth login
+   ```
+
+   Follow the prompts to complete the login.
+
+3. Clone the project repository:
+   ```bash
+   git clone https://github.com/EAGLE1309/alumni-jams
+   ```
+   This will create a local copy of the project in your working environment.
+
+## Step 2: Install Project Dependencies
+
+Navigate to the project folder and install all required dependencies:
+
+```bash
+npm install
+```
+
+> **Tip**: Ensure you have a stable internet connection during installation, as it may take some time to download all dependencies.
+
+## Step 3: Start the Development Server
+
+Run the following command to start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Once the server is running, you can preview the webpage in your browser by visiting:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+http://localhost:3000/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Troubleshooting Common Issues
 
-## Learn More
+- **Dependency Errors**: If you encounter errors during `npm install`, try clearing the npm cache with `npm cache clean --force` and rerun `npm install`.
+- **Port Conflicts**: If `http://localhost:3000/` is already in use, either stop the conflicting service or change the port in the project's configuration file if applicable.
 
-To learn more about Next.js, take a look at the following resources:
+## Branch Usage Guidelines
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each team member has an assigned branch. **Please do not commit to any branch other than your assigned branch.** This ensures an organized workflow and prevents code conflicts.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Username  | Assigned Branch |
+| --------- | --------------- |
+| Eagle     | main            |
+| Prasad    | byte-2          |
+| Ayush     | byte-3          |
+| Sanskruti | byte-4          |
+| Anshul    | byte-5          |
+| Tanmay    | byte-6          |
 
-## Deploy on Vercel
+> **Important**: Always pull the latest changes from your assigned branch before making new commits. Use the following command to keep your branch up-to-date:
+>
+> ```bash
+> git pull origin <your-branch-name>
+> ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Branch Etiquette
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Commit Only to Your Branch**: Avoid making changes in branches other than your own. This helps maintain a clean history for each branch.
+- **Commit Messages**: Write clear and concise commit messages that explain the purpose of the changes. For example:
+  ```bash
+  git commit -m "Fix: Adjust button alignment on homepage"
+  ```
+- **Push Changes Frequently**: To avoid losing your work, push your changes regularly:
+  ```bash
+  git push origin <your-branch-name>
+  ```
+
+## Additional Tips
+
+- **Stay Updated**: Regularly communicate with the team to stay informed of any updates or changes.
+- **Code Reviews**: Coordinate with the team lead if a code review is needed before merging any significant changes.
+
+---
+
+That’s it! You’re ready to start working on the project. If you encounter any issues, reach out to Eagle for assistance. Happy coding! 🎉
