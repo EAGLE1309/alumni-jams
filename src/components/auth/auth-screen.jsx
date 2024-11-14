@@ -7,8 +7,18 @@ import SignUpCard from "./sign-up-card";
 import { Button } from "@/components/ui/button";
 import { RiArrowLeftLine } from "react-icons/ri";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useUserContext } from "@/context/AuthContext";
 
 const AuthScreen = () => {
+  const router = useRouter();
+  const { isAuthenticated } = useUserContext();
+
+  if (isAuthenticated) {
+    router.push("/");
+    return;
+  }
+
   const [state, setState] = useState("signIn");
 
   return (

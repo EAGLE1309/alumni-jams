@@ -12,22 +12,32 @@ import { Separator } from "@/components/ui/separator";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import { createUserAccount } from "@/lib/appwrite/create-user";
+import { useRouter } from "next/navigation";
 
 const SignUpCard = ({ setState }) => {
+  const router = useRouter();
+
+  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  console.log(
-    Button,
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-    Input,
-    Separator
-  );
+  const [formState, setFormState] = useState(false);
+
+  const registerUser = async () => {
+    setFormState(true);
+
+    const user = { name, username, email, password };
+    await createUserAccount(user);
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setFormState(false);
+  };
 
   return (
     <Card className="w-full h-full p-8">
@@ -40,7 +50,23 @@ const SignUpCard = ({ setState }) => {
       <CardContent className="space-y-5 px-0 pb-0">
         <form className="space-y-2.5">
           <Input
-            disabled={false}
+            disabled={formState}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            type="text"
+            required
+          />
+          <Input
+            disabled={formState}
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="Username"
+            type="text"
+            required
+          />
+          <Input
+            disabled={formState}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
@@ -48,7 +74,7 @@ const SignUpCard = ({ setState }) => {
             required
           />
           <Input
-            disabled={false}
+            disabled={formState}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -56,14 +82,19 @@ const SignUpCard = ({ setState }) => {
             required
           />
           <Input
-            disabled={false}
+            disabled={formState}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm password"
             type="password"
             required
           />
-          <Button className="w-full" size="lg" disabled={false}>
+          <Button
+            onClick={() => registerUser()}
+            className="w-full"
+            size="lg"
+            disabled={formState}
+          >
             Continue
           </Button>
         </form>
@@ -72,7 +103,7 @@ const SignUpCard = ({ setState }) => {
 
         <div className="flex flex-col justify-between gap-y-2.5">
           <Button
-            disabled={false}
+            disabled={true}
             variant="outline"
             className="w-full relative"
             size={"lg"}
@@ -82,7 +113,7 @@ const SignUpCard = ({ setState }) => {
             Continue with Google
           </Button>
           <Button
-            disabled={false}
+            disabled={true}
             variant="outline"
             className="w-full relative"
             size={"lg"}
