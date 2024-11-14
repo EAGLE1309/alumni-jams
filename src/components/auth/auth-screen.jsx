@@ -14,12 +14,13 @@ const AuthScreen = () => {
   const router = useRouter();
   const { isAuthenticated } = useUserContext();
 
-  if (isAuthenticated) {
-    router.push("/");
-    return;
-  }
-
   const [state, setState] = useState("signIn");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated, router]);
 
   return (
     <div className="h-full flex flex-col gap-y-5 items-center justify-center bg-black">
