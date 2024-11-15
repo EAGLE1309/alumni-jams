@@ -8,27 +8,65 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { useUserContext } from "@/context/AuthContext";
 import { signInAccount } from "@/lib/appwrite/login-user";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 
 const SignInCard = ({ setState }) => {
+  // Check if user is authenticated and update the context
+  const { checkAuthUser } = useUserContext();
+
+  // Router to update path
+  const router = useRouter();
+
+  // Form states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [formState, setFormState] = useState(false);
 
+  // Login user
   const loginUser = async () => {
-    setFormState(true);
-
+    setFormState(true); // Set loading true
     const user = { email, password };
-    await signInAccount(user);
 
-    setEmail("");
-    setPassword("");
-    setFormState(false);
+    try {
+      // Login user function and create it's session
+      const session = await signInAccount(user);
+
+      if (!session) {
+        toast.error("Login failed. Please try again, Code: SIGNIN_1");
+        return;
+      }
+
+      // ! IMPORTANT: Check if user is authenticated, and update context
+      const isLoggedIn = await checkAuthUser();
+
+      // If user is authenticated then return to next page and send a success message
+      if (isLoggedIn) {
+        setEmail("");
+        setPassword("");
+
+        toast(`Welcome, ${email}. Login successful.`);
+
+        router.push("/");
+      } else {
+        toast.error("Login failed. Please try again, Code: SIGNIN_2");
+        return;
+      }
+    } catch (error) {
+      // If there is any unknowm error, log it to the console
+      console.log(error);
+      toast.error(error.message);
+    } finally {
+      // Set loading false
+      setFormState(false);
+    }
   };
 
   return (

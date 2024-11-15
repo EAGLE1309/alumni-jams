@@ -55,7 +55,9 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    checkAuthUser();
+    return () => {
+      checkAuthUser();
+    };
   }, []);
 
   const value = {
