@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
 import { signOutAccount } from "@/lib/appwrite/sign-out";
 import Link from "next/link";
@@ -11,16 +10,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const {
-    user,
-    isAuthenticated,
-    setIsAuthenticated,
-    setUser,
-    isLoading,
-    checkAuthUser,
-  } = useUserContext();
-  const router = useRouter();
-
+  const { user, isAuthenticated, setIsAuthenticated, setUser, checkAuthUser } =
+    useUserContext();
   const [name, setName] = useState("");
 
   const checkAuth = async () => {

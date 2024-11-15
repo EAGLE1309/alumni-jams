@@ -14,10 +14,17 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { createUserAccount } from "@/lib/appwrite/create-user";
 import { useRouter } from "next/navigation";
+import { signInAccount } from "@/lib/appwrite/login-user";
+import { useUserContext } from "@/context/AuthContext";
 
 const SignUpCard = ({ setState }) => {
+  // Check if user is authenticated and update the context
+  const { checkAuthUser } = useUserContext();
+
+  // Router to update path
   const router = useRouter();
 
+  // Form states
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,17 +33,48 @@ const SignUpCard = ({ setState }) => {
 
   const [formState, setFormState] = useState(false);
 
+  // Register user
   const registerUser = async () => {
     setFormState(true);
-
     const user = { name, username, email, password };
-    await createUserAccount(user);
 
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setFormState(false);
+    try {
+      const newUser = await createUserAccount(user);
+
+      if (!newUser) {
+        toast("Sign up failed. Please try again.");
+
+        return;
+      }
+
+      const session = await signInAccount({
+        email: user.email,
+        password: user.password,
+      });
+
+      if (!session) {
+        toast("Something went wrong. Please login your new account");
+        return;
+      }
+      const isLoggedIn = await checkAuthUser();
+
+      if (isLoggedIn) {
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+
+        router.push("/");
+      } else {
+        toast("Login failed. Please try again.");
+
+        return;
+      }
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setFormState(false);
+    }
   };
 
   return (
