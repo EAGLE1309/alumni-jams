@@ -11,15 +11,21 @@ import { Separator } from "@/components/ui/separator";
 
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+
 import { useState } from "react";
-import { createUserAccount } from "@/lib/appwrite/create-user";
 import { useRouter } from "next/navigation";
-import { signInAccount } from "@/lib/appwrite/login-user";
 import { useUserContext } from "@/context/AuthContext";
+
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from "@/lib/react-query/queries";
 
 const SignUpCard = ({ setState }) => {
   // Check if user is authenticated and update the context
   const { checkAuthUser } = useUserContext();
+  const { mutateAsync: createUserAccount } = useCreateUserAccount();
+  const { mutateAsync: signInAccount } = useSignInAccount();
 
   // Router to update path
   const router = useRouter();

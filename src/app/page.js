@@ -1,17 +1,21 @@
 "use client";
 
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
-import { signOutAccount } from "@/lib/appwrite/sign-out";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
+
+import { useSignOutAccount } from "@/lib/react-query/queries";
 
 export default function Home() {
   const { user, isAuthenticated, setIsAuthenticated, setUser, checkAuthUser } =
     useUserContext();
+
+  const { mutateAsync: signOutAccount } = useSignOutAccount();
+
   const [name, setName] = useState("");
 
   const checkAuth = async () => {

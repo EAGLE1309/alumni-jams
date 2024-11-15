@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+
 import { useUserContext } from "@/context/AuthContext";
-import { signInAccount } from "@/lib/appwrite/login-user";
+import { useSignInAccount } from "@/lib/react-query/queries";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -20,6 +22,7 @@ import { toast } from "sonner";
 const SignInCard = ({ setState }) => {
   // Check if user is authenticated and update the context
   const { checkAuthUser } = useUserContext();
+  const { mutateAsync: signInAccount } = useSignInAccount();
 
   // Router to update path
   const router = useRouter();
@@ -47,6 +50,8 @@ const SignInCard = ({ setState }) => {
       // ! IMPORTANT: Check if user is authenticated, and update context
       const isLoggedIn = await checkAuthUser();
 
+      console.log(isLoggedIn);
+
       // If user is authenticated then return to next page and send a success message
       if (isLoggedIn) {
         setEmail("");
@@ -55,9 +60,6 @@ const SignInCard = ({ setState }) => {
         toast(`Welcome, ${email}. Login successful.`);
 
         router.push("/");
-      } else {
-        toast.error("Login failed. Please try again, Code: SIGNIN_2");
-        return;
       }
     } catch (error) {
       // If there is any unknowm error, log it to the console
