@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import SignInCard from "./sign-in-card";
 import SignUpCard from "./sign-up-card";
@@ -18,7 +18,7 @@ const AuthScreen = () => {
 
   const [state, setState] = useState("signin");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const state = searchParams.get("state");
 
     if (state === "signup") {
