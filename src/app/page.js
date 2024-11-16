@@ -30,8 +30,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (!isAuthenticated) return;
-
     checkAuth();
 
     user.name === "" ? setName("You are not logged in") : setName(user.name);
