@@ -10,6 +10,9 @@ module.exports = {
     "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      serif: ["PT Serif", "serif"],
+    },
     extend: {
       colors: {
         background: "hsl(var(--background))",

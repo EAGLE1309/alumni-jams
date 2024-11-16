@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
+// const serif = PT_Serif({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Alumni Jams",
