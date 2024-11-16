@@ -11,9 +11,13 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      serif: ["PT Serif", "serif"],
+      body: ["var(--font-satoshi)"],
+      heading: ["var(--font-source-serif)"],
     },
     extend: {
+      backgroundImage: {
+        "home-bgs": "url('../assets/background-image.png')",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -26,7 +30,7 @@ module.exports = {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#004FCD",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

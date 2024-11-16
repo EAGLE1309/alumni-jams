@@ -1,62 +1,87 @@
-"use client";
-
-import Link from "next/link";
-
+import MaxWidthWrapper from "@/components/layout/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { useEffect, useState } from "react";
-import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
-
-import { useSignOutAccount } from "@/lib/react-query/queries";
+import { ArrowUpRightIcon } from "lucide-react";
 
 export default function Home() {
-  const { user, isAuthenticated, setIsAuthenticated, setUser, checkAuthUser } =
-    useUserContext();
-
-  const { mutateAsync: signOutAccount } = useSignOutAccount();
-
-  const [name, setName] = useState("");
-
-  const checkAuth = async () => {
-    await checkAuthUser();
-  };
-  const handleSignOut = async (e) => {
-    e.preventDefault();
-    signOutAccount();
-    setName("You are not logged in");
-    setIsAuthenticated(false);
-    setUser(INITIAL_USER);
-  };
-
-  useEffect(() => {
-    checkAuth();
-
-    user.name === "" ? setName("You are not logged in") : setName(user.name);
-
-    return () => true;
-  }, [isAuthenticated]);
-
   return (
-    <section className="h-screen flex items-center justify-center bg-black">
-      <Card>
-        <CardHeader>
-          <CardTitle>Testing features - alpha demo v1.1</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col justify-between gap-y-2.5">
-          <h1 className="text-2xl font-bold">{name}</h1>
-          {!isAuthenticated ? (
-            <Button asChild>
-              <Link href="/auth">Login / Register</Link>
-            </Button>
-          ) : (
-            <Button onClick={(e) => handleSignOut(e)}>Logout</Button>
-          )}
-          <Button className="opacity-50 pointer-events-none !cursor-no-drop">
-            Chats
-          </Button>
-        </CardContent>
-      </Card>
-    </section>
+    <>
+      <section className="h-full flex items-center justify-center flex-col w-full bg-home-bgs bg-[#181A1C] bg-cover">
+        <h1 className="text-white text-center font-heading text-6xl font-[500]">
+          Reunite with your <br /> Batchmates
+        </h1>
+        <p className="text-white text-center text-lg font-normal mt-8 max-w-[500px]">
+          Welcome to the official Sinhgad Alumni Network, where past meets the
+          present and future. Our vibrant community of graduates is spread
+          across the globe, excelling in diverse fields.
+        </p>
+        <Button className="mt-8 text-md" size="lg">
+          Register
+        </Button>
+      </section>
+      <section className="py-28 bg-[#181A1C]">
+        <MaxWidthWrapper>
+          <div className="flex items-center justify-evenly w-full">
+            <div className="h-full flex flex-col items-start justify-center">
+              <h1 className="text-white font-heading text-3xl font-[500]">
+                New to this program? <br /> Join Us
+              </h1>
+              <Button
+                className="mt-5 px-12 text-md bg-white/5 font-semibold hover:bg-white/15"
+                size="lg"
+              >
+                Register <ArrowUpRightIcon color="#0260f5" />
+              </Button>
+            </div>
+            <div className="h-full flex flex-col items-start justify-center">
+              <h1 className="text-white font-heading text-3xl font-[500]">
+                Already a part of <br /> community?
+              </h1>
+              <Button
+                className="mt-5 px-12 text-md bg-white/5 font-semibold hover:bg-white/15"
+                size="lg"
+              >
+                Login <ArrowUpRightIcon color="#0260f5" />
+              </Button>
+            </div>
+          </div>
+        </MaxWidthWrapper>
+      </section>
+      <section>
+        <MaxWidthWrapper className="py-28 flex flex-col gap-12">
+          <div className="flex flex-col w-full">
+            <h1 className="font-heading text-3xl font-semibold underline decoration-primary decoration-[7px] underline-offset-[12px]">
+              About Alumni Jams
+            </h1>
+            <p className="text-lg font-normal mt-8 max-w-[500px]">
+              An official Alumni Network, where past meets the present and
+              future. Our vibrant community of graduates is spread across the
+              globe, excelling in diverse fields.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-end w-full">
+            <h1 className="font-heading text-3xl font-semibold underline decoration-primary decoration-[7px] underline-offset-[12px]">
+              Job Portal
+            </h1>
+            <p className="text-lg text-right font-normal mt-8 max-w-[500px]">
+              An official Alumni Network, where past meets the present and
+              future. Our vibrant community of graduates is spread across the
+              globe, excelling in diverse fields.
+            </p>
+          </div>
+
+          <div className="flex flex-col w-full">
+            <h1 className="font-heading text-3xl font-semibold underline decoration-primary decoration-[7px] underline-offset-[12px]">
+              Community and Events
+            </h1>
+            <p className="text-lg font-normal mt-8 max-w-[500px]">
+              An official Alumni Network, where past meets the present and
+              future. Our vibrant community of graduates is spread across the
+              globe, excelling in diverse fields.
+            </p>
+          </div>
+        </MaxWidthWrapper>
+      </section>
+    </>
   );
 }

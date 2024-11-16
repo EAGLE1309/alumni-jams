@@ -9,7 +9,7 @@ body,
 }
 
 body {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-satoshi);
 }
 
 @layer utilities {
@@ -80,5 +80,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-satoshi);
   }
 }
