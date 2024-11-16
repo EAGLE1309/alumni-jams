@@ -132,9 +132,9 @@ const SignInCard = ({ setState }) => {
           </Button>
         </div>
         <p className="text-sm text-muted-foreground font-medium">
-          {"Don't have an account?"}
+          {"Don't have an account? "}
           <span
-            onClick={() => setState("signUp")}
+            onClick={() => setState("signup")}
             className="text-sky-500 hover:underline cursor-pointer"
           >
             Sign Up

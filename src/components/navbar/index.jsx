@@ -3,8 +3,11 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Navbar = () => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   return (
@@ -15,7 +18,10 @@ const Navbar = () => {
         } px-2.5 py-2.5`}
       >
         <div className="h-auto w-full lg:mx-auto max-w-screen-xl flex justify-between items-center">
-          <h1 className="text-xl text-white font-heading leading-0 mt-[-0.45rem]">
+          <h1
+            className="text-xl text-white font-heading leading-0 mt-[-0.45rem] cursor-pointer"
+            onClick={() => router.push("/")}
+          >
             Alumni Jams
           </h1>
           <div className="gap-4 hidden md:flex items-center">
@@ -25,8 +31,12 @@ const Navbar = () => {
             <Button className="text-white" variant={"ghost"}>
               Events
             </Button>
-            <Button className="text-white">Login</Button>
-            <Button className="text-white">Register</Button>
+            <Button className="text-white" asChild>
+              <Link href="/auth?state=signin">Login</Link>
+            </Button>
+            <Button className="text-white" asChild>
+              <Link href="/auth?state=signup">Register</Link>
+            </Button>
           </div>
 
           <div className="flex items-center gap-4 md:hidden">

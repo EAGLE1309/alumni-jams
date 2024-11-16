@@ -1,6 +1,8 @@
+import Footer from "@/components/footer";
 import MaxWidthWrapper from "@/components/layout/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRightIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -14,8 +16,8 @@ export default function Home() {
           present and future. Our vibrant community of graduates is spread
           across the globe, excelling in diverse fields.
         </p>
-        <Button className="mt-8 text-md" size="lg">
-          Register
+        <Button className="mt-8 text-md" asChild size="lg">
+          <Link href="/auth?state=signup">Register</Link>
         </Button>
       </section>
       <section className="py-28 bg-[#181A1C]">
@@ -29,7 +31,12 @@ export default function Home() {
                 className="mt-5 px-12 text-md bg-white/5 font-semibold hover:bg-white/15"
                 size="lg"
               >
-                Register <ArrowUpRightIcon color="#0260f5" />
+                <Link
+                  className="flex items-center gap-2"
+                  href="/auth?state=signup"
+                >
+                  Register <ArrowUpRightIcon color="#0260f5" />
+                </Link>
               </Button>
             </div>
             <div className="h-full flex flex-col items-start justify-center">
@@ -40,7 +47,12 @@ export default function Home() {
                 className="mt-5 px-12 text-md bg-white/5 font-semibold hover:bg-white/15"
                 size="lg"
               >
-                Login <ArrowUpRightIcon color="#0260f5" />
+                <Link
+                  className="flex items-center gap-2"
+                  href="/auth?state=signin"
+                >
+                  Login <ArrowUpRightIcon color="#0260f5" />
+                </Link>
               </Button>
             </div>
           </div>
@@ -82,6 +94,7 @@ export default function Home() {
           </div>
         </MaxWidthWrapper>
       </section>
+      <Footer />
     </>
   );
 }

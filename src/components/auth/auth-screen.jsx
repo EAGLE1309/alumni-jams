@@ -1,42 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 import SignInCard from "./sign-in-card";
 import SignUpCard from "./sign-up-card";
 import { Button } from "@/components/ui/button";
 import { RiArrowLeftLine } from "react-icons/ri";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUserContext } from "@/context/AuthContext";
 
 const AuthScreen = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
   const { isAuthenticated } = useUserContext();
 
-  const [state, setState] = useState("signIn");
+  const [state, setState] = useState("signin");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const state = searchParams.get("state");
+
+    if (state === "signup") {
+      setState("signup");
+    }
+
+    if (state === "signin") {
+      setState("signin");
+    }
+
     if (isAuthenticated) {
       router.push("/");
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, router, searchParams]);
 
   return (
     <div className="h-full flex flex-col gap-y-5 items-center justify-center bg-black">
       <div className="md:h-auto md:w-[420px]">
-        {state === "signIn" ? (
+        {state === "signin" ? (
           <SignInCard setState={setState} />
-        ) : state === "signUp" ? (
+        ) : state === "signup" ? (
           <SignUpCard setState={setState} />
         ) : null}
       </div>
-      <Button asChild className="bg-black border-[1px] border-white">
-        <Link href="/">
-          Go Back
-          <RiArrowLeftLine />
-        </Link>
-      </Button>
     </div>
   );
 };
