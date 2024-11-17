@@ -59,7 +59,7 @@ const SignInCard = ({ setState }) => {
 
         toast(`Welcome, ${email}. Login successful.`);
 
-        router.push("/");
+        router.push("/home");
       }
     } catch (error) {
       // If there is any unknowm error, log it to the console

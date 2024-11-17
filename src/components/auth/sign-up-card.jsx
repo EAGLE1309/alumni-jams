@@ -70,7 +70,7 @@ const SignUpCard = ({ setState }) => {
         setPassword("");
         setConfirmPassword("");
 
-        router.push("/");
+        router.push("/home");
       } else {
         toast("Login failed. Please try again.");
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../../assets/logo";
 import {
   Briefcase,
@@ -47,6 +47,7 @@ import {
 import { useUserContext } from "@/context/AuthContext";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
+import { toast } from "sonner";
 
 // Menu items.
 const items = [
@@ -79,7 +80,23 @@ const items = [
 
 export default function AppSidebar() {
   const { theme, setTheme } = useTheme();
-  const { user } = useUserContext();
+  const { user, isAuthenticated, checkAuthUser } = useUserContext();
+
+  const [data, setData] = React.useState(null);
+
+  const checkAuth = async () => {
+    await checkAuthUser();
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    checkAuth();
+
+    user.name === "" ? toast("You are not logged in") : setData(user);
+
+    return () => true;
+  }, [isAuthenticated]);
 
   return (
     <Sidebar>
@@ -119,14 +136,14 @@ export default function AppSidebar() {
                   ) : (
                     <>
                       <img
-                        src={user.imageUrl}
+                        src={data?.imageUrl}
                         alt=""
                         className="w-8 h-8 rounded-full"
                       />
                       <div className="flex flex-col items-start justify-center py-2">
-                        <span>{user.name}</span>
+                        <span>{data?.name}</span>
                         <span className="text-sm text-gray-400">
-                          {user.email}
+                          {data?.email}
                         </span>
                       </div>
                     </>
