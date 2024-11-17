@@ -40,8 +40,15 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4 md:hidden">
-            <Button size={"lg"} variant={"default"}>
-              Sign Up
+            <Button
+              className={`${
+                open ? "bg-white text-primary" : ""
+              } font-semibold `}
+              size={"lg"}
+              variant={"default"}
+              asChild
+            >
+              <Link href="/auth?state=signup">Sign Up</Link>
             </Button>
             <Button
               onClick={() => setOpen(!open)}
@@ -62,33 +69,33 @@ const Navbar = () => {
         >
           <div
             onClick={() => setOpen(false)}
-            className="w-full text-2xl hover:text-gray-500 transition-all font-heading py-2 self-start text-left"
+            className="w-full text-2xl hover:text-blue-400 transition-all font-heading py-2 self-start text-left"
           >
-            {"; Explore"}
+            {"; Student Corner"}
           </div>
           <div
             onClick={() => setOpen(false)}
-            className="w-full text-2xl hover:text-gray-500 transition-all font-heading py-2 self-start text-left"
+            className="w-full text-2xl hover:text-blue-400 transition-all font-heading py-2 self-start text-left"
           >
-            {"; Latest Releases"}
+            {"; Job Portal"}
           </div>
           <div
             onClick={() => setOpen(false)}
-            className="w-full text-2xl hover:text-gray-500 transition-all font-heading py-2 self-start text-left"
+            className="w-full text-2xl hover:text-blue-400 transition-all font-heading py-2 self-start text-left"
           >
-            {"; Customise"}
+            {"; Connect with Alumnis"}
           </div>
           <div
             onClick={() => setOpen(false)}
-            className="w-full text-2xl hover:text-gray-500 transition-all font-heading py-2 self-start text-left"
-          >
-            {"; Pricing"}
-          </div>
-          <div
-            onClick={() => setOpen(false)}
-            className="w-full text-2xl hover:text-gray-500 transition-all font-heading py-2 self-start text-left"
+            className="w-full text-2xl hover:text-blue-400 transition-all font-heading py-2 self-start text-left"
           >
             {"; About Us"}
+          </div>
+          <div
+            onClick={() => setOpen(false)}
+            className="w-full text-2xl hover:text-blue-400 transition-all font-heading py-2 self-start text-left"
+          >
+            {"; Contact Us"}
           </div>
         </div>
       </nav>

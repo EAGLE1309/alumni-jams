@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import MaxWidthWrapper from "@/components/layout/MaxWidthWrapper";
+import Navbar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
@@ -7,11 +8,12 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <section className="h-full flex items-center justify-center flex-col w-full bg-home-bgs bg-[#181A1C] bg-cover">
-        <h1 className="text-white text-center font-heading text-6xl font-[500]">
+      <Navbar />
+      <section className="h-full px-4 flex items-center justify-center flex-col w-full bg-home-bgs bg-[#181A1C] bg-cover">
+        <h1 className="text-white text-center font-heading text-4xl md:text-6xl font-[500]">
           Reunite with your <br /> Batchmates
         </h1>
-        <p className="text-white text-center text-lg font-normal mt-8 max-w-[500px]">
+        <p className="text-white text-center text-md md:text-lg font-normal mt-8 max-w-[500px]">
           Welcome to the official Sinhgad Alumni Network, where past meets the
           present and future. Our vibrant community of graduates is spread
           across the globe, excelling in diverse fields.
@@ -20,9 +22,9 @@ export default function Home() {
           <Link href="/auth?state=signup">Register</Link>
         </Button>
       </section>
-      <section className="py-28 bg-[#181A1C]">
+      <section className="pt-8 pb-24 md:py-28 px-2 bg-[#181A1C]">
         <MaxWidthWrapper>
-          <div className="flex items-center justify-evenly w-full">
+          <div className="flex items-start gap-16 md:items-center flex-col md:flex-row justify-evenly w-full">
             <div className="h-full flex flex-col items-start justify-center">
               <h1 className="text-white font-heading text-3xl font-[500]">
                 New to this program? <br /> Join Us

@@ -5,7 +5,6 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
-import Navbar from "@/components/navbar";
 
 const satoshi = localFont({
   src: [
@@ -51,10 +50,7 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <QueryProvider>
-            <AuthProvider>
-              <Navbar />
-              {children}
-            </AuthProvider>
+            <AuthProvider>{children}</AuthProvider>
             <Toaster />
           </QueryProvider>
         </ThemeProvider>
