@@ -1,12 +1,15 @@
-import AppSidebar from "@/components/home/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  AppSidebar,
+  SidebarCustomTrigger,
+} from "@/components/home/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const layout = ({ children }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
-        <SidebarTrigger />
+      <main className="w-full">
+        <SidebarCustomTrigger />
         {children}
       </main>
     </SidebarProvider>

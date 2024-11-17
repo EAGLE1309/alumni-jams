@@ -17,7 +17,7 @@ const AuthScreen = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/");
+      router.push("/home");
     }
 
     const state = searchParams.get("state");

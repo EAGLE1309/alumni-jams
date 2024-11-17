@@ -4,21 +4,18 @@ import React, { useEffect } from "react";
 import Logo from "../../assets/logo";
 import {
   Briefcase,
-  Calendar,
   Home,
-  Inbox,
   LucideLogOut,
-  Menu,
   MessageSquareText,
   MonitorCog,
   Moon,
-  Search,
+  PanelLeftClose,
   Settings,
   Sparkle,
   Sun,
   User,
 } from "lucide-react";
-import { useTheme } from "next-themes";
+
 import {
   Sidebar,
   SidebarContent,
@@ -28,14 +25,11 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import ThemeToggle from "./toggle-theme";
 
-import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -44,10 +38,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import { useUserContext } from "@/context/AuthContext";
+import { useTheme } from "next-themes";
+import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
+import Image from "next/image";
+import { useSignOutAccount } from "@/lib/react-query/queries";
+import { useRouter } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -78,9 +76,13 @@ const items = [
   },
 ];
 
-export default function AppSidebar() {
+export function AppSidebar() {
   const { theme, setTheme } = useTheme();
-  const { user, isAuthenticated, checkAuthUser } = useUserContext();
+  const { user, isAuthenticated, setIsAuthenticated, setUser, checkAuthUser } =
+    useUserContext();
+  const { mutateAsync: signOutAccount } = useSignOutAccount();
+
+  const router = useRouter();
 
   const [data, setData] = React.useState(null);
 
@@ -88,10 +90,22 @@ export default function AppSidebar() {
     await checkAuthUser();
   };
 
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+    await signOutAccount();
+    setIsAuthenticated(false);
+    setUser(INITIAL_USER);
+    setData(INITIAL_USER);
+    toast("You are signed out (handle sign out async function(s))");
+    router.push("/auth");
+  };
+
   useEffect(() => {
     checkAuth();
 
-    user.name === "" ? toast("You are not logged in") : setData(user);
+    user.name === ""
+      ? toast("You are not logged in (use effect)")
+      : setData(user);
 
     return () => true;
   }, [isAuthenticated]);
@@ -133,9 +147,11 @@ export default function AppSidebar() {
                     <Skeleton className="w-full h-12" />
                   ) : (
                     <>
-                      <img
+                      <Image
                         src={data?.imageUrl}
                         alt=""
+                        width={32}
+                        height={32}
                         className="w-8 h-8 rounded-full"
                       />
                       <div className="flex flex-col items-start justify-center py-2">
@@ -186,7 +202,10 @@ export default function AppSidebar() {
                       System
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-red-500 cursor-pointer">
+                    <DropdownMenuItem
+                      onClick={(e) => handleSignOut(e)}
+                      className="text-red-500 cursor-pointer"
+                    >
                       <LucideLogOut /> Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -197,5 +216,18 @@ export default function AppSidebar() {
         </SidebarGroup>
       </SidebarFooter>
     </Sidebar>
+  );
+}
+
+export function SidebarCustomTrigger() {
+  const { toggleSidebar } = useSidebar();
+
+  return (
+    <button
+      onClick={toggleSidebar}
+      className="p-2 bg-white/5 sticky top-2 left-2 ml-2 backdrop-blur-lg font-semibold flex items-center gap-2 lg:hidden rounded-md hover:bg-white/15"
+    >
+      <PanelLeftClose /> Open Sidebar
+    </button>
   );
 }
