@@ -89,8 +89,6 @@ export default function AppSidebar() {
   };
 
   useEffect(() => {
-    if (!isAuthenticated) return;
-
     checkAuth();
 
     user.name === "" ? toast("You are not logged in") : setData(user);
