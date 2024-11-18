@@ -1,17 +1,32 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useUserContext } from "@/context/AuthContext";
+import { AppSidebar } from "@/components/main/app-sidebar";
+import Home from "@/components/main/home";
+import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
+import { useSignOutAccount } from "@/lib/react-query/queries";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-export default function Home() {
-  const { user, isAuthenticated, checkAuthUser } = useUserContext();
+export default function Page() {
+  const { user, setIsAuthenticated, setUser, isAuthenticated, checkAuthUser } =
+    useUserContext();
+  const router = useRouter();
 
-  const [data, setData] = useState(null);
+  const { mutateAsync: signOutAccount } = useSignOutAccount();
+  const [data, setData] = useState(INITIAL_USER);
 
   const checkAuth = async () => {
     await checkAuthUser();
+  };
+
+  const handleSignOut = async () => {
+    await signOutAccount();
+    setIsAuthenticated(false);
+    setUser(INITIAL_USER);
+    setData(INITIAL_USER);
+    toast("You are signed out (handle sign out async function(s))");
+    router.push("/auth");
   };
 
   useEffect(() => {
@@ -24,23 +39,16 @@ export default function Home() {
     return () => true;
   }, [isAuthenticated]);
 
+  if (!isAuthenticated) {
+    toast("You are not logged in (home/page.js)");
+    return;
+  }
   return (
     <>
-      <section className="h-full p-4 lg:px-8 mt-4 flex items-start flex-col w-full">
-        <h1 className="text-2xl font-bold">
-          Welcome {data?.name}, to Alumni Jams
-        </h1>
-        <HomeCTABox />
-      </section>
+      <AppSidebar data={data} handleSignOut={handleSignOut} />
+      <main className="w-full">
+        <Home data={data} />
+      </main>
     </>
   );
 }
-
-const HomeCTABox = () => {
-  return (
-    <div className="flex flex-col w-full lg:w-[50%] items-start justify-center gap-4 py-5 px-5 md:px-8 bg-primary my-8 rounded-xl">
-      <h2 className="text-sm">Sinhgad Carnival 2024</h2>
-      <h1 className="text-3xl font-bold">Springfest is hiring now</h1>
-    </div>
-  );
-};
