@@ -78,9 +78,10 @@ export default function Home() {
               Job Portal
             </h1>
             <p className="text-lg text-right font-normal mt-8 max-w-[500px]">
-              An official Alumni Network, where past meets the present and
-              future. Our vibrant community of graduates is spread across the
-              globe, excelling in diverse fields.
+              Welcome to the Job Portal — the hub for career growth within our
+              Alumni Network. This platform bridges the gap between alumni,
+              students, and recruiters, enabling meaningful connections and
+              professional development.
             </p>
           </div>
 
@@ -89,9 +90,10 @@ export default function Home() {
               Community and Events
             </h1>
             <p className="text-lg font-normal mt-8 max-w-[500px]">
-              An official Alumni Network, where past meets the present and
-              future. Our vibrant community of graduates is spread across the
-              globe, excelling in diverse fields.
+              The Community & Events section is at the heart of our Alumni
+              Network, where relationships grow and memories are made. Stay
+              engaged with fellow alumni and current students through a variety
+              of events, both online and in-person.
             </p>
           </div>
         </MaxWidthWrapper>

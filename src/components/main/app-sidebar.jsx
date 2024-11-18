@@ -13,6 +13,7 @@ import {
   Sparkle,
   Sun,
   User,
+  GraduationCap,
 } from "lucide-react";
 
 import {
@@ -41,12 +42,13 @@ import { useTheme } from "next-themes";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
+import Link from "next/link";
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/home",
     icon: Home,
   },
   {
@@ -56,7 +58,7 @@ const items = [
   },
   {
     title: "Job Postings",
-    url: "#",
+    url: "/jobs",
     icon: Briefcase,
   },
   {
@@ -68,6 +70,11 @@ const items = [
     title: "Community & News",
     url: "#",
     icon: Sparkle,
+  },
+  {
+    title: "Student Corner",
+    url: "#",
+    icon: GraduationCap,
   },
 ];
 
@@ -90,10 +97,10 @@ export function AppSidebar({ data, handleSignOut }) {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

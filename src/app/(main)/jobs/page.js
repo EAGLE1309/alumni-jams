@@ -1,7 +1,7 @@
 "use client";
 
 import { AppSidebar } from "@/components/main/app-sidebar";
-import Home from "@/components/main/home";
+import Jobs from "@/components/main/jobs";
 import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/queries";
 import { useRouter } from "next/navigation";
@@ -40,14 +40,14 @@ export default function Page() {
   }, [isAuthenticated]);
 
   if (!isAuthenticated) {
-    toast("You are not logged in (home/page.js)");
+    toast("You are not logged in (jobs/page.js)");
     return;
   }
   return (
     <>
       <AppSidebar data={data} handleSignOut={handleSignOut} />
       <main className="w-full">
-        <Home data={data} />
+        <Jobs data={data} />
       </main>
     </>
   );
