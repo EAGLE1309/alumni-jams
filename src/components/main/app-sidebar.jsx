@@ -68,12 +68,12 @@ const items = [
   },
   {
     title: "Community & News",
-    url: "#",
+    url: "/community",
     icon: Sparkle,
   },
   {
     title: "Student Corner",
-    url: "#",
+    url: "/student-corner",
     icon: GraduationCap,
   },
 ];
