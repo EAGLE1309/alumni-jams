@@ -1,7 +1,7 @@
 "use client";
 
 import { AppSidebar } from "@/components/main/app-sidebar";
-import StudentCorner from "@/components/main/studentCorner";
+import StudentCorner from "@/components/main/student-corner";
 import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/queries";
 import { useRouter } from "next/navigation";

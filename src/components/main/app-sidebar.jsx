@@ -73,7 +73,7 @@ const items = [
   },
   {
     title: "Student Corner",
-    url: "/studentCorner",
+    url: "/student-corner",
     icon: GraduationCap,
   },
 ];
