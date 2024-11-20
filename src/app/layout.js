@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { AuthsProvider } from "@/context/AuthsContext";
 
 const satoshi = localFont({
   src: [
@@ -39,7 +40,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={` ${satoshi.variable} ${source_serif.variable} antialiased`}
       >
@@ -49,10 +50,12 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            <AuthProvider>{children}</AuthProvider>
-            <Toaster />
-          </QueryProvider>
+          <AuthsProvider>
+            <QueryProvider>
+              <AuthProvider>{children}</AuthProvider>
+              <Toaster richColors />
+            </QueryProvider>
+          </AuthsProvider>
         </ThemeProvider>
       </body>
     </html>

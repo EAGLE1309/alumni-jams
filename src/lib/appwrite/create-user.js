@@ -1,5 +1,5 @@
-import { ID, Query } from "appwrite";
-import { appwriteConfig, account, databases, storage, avatars } from "./config";
+import { ID } from "appwrite";
+import { appwriteConfig, account, databases, avatars } from "./config";
 
 /* =====================[AUTH]===================== */
 export async function createUserAccount(user) {

@@ -68,12 +68,12 @@ const items = [
   },
   {
     title: "Community & News",
-    url: "#",
+    url: "/community",
     icon: Sparkle,
   },
   {
     title: "Student Corner",
-    url: "#",
+    url: "/student-corner",
     icon: GraduationCap,
   },
 ];
@@ -114,12 +114,12 @@ export function AppSidebar({ data, handleSignOut }) {
             <SidebarMenu className="mb-2 bg-white/5 rounded-lg">
               <SidebarMenuItem className="py-0 px-2">
                 <SidebarMenuButton className="h-auto">
-                  {data.name === "" ? (
+                  {data?.name === "" ? (
                     <Skeleton className="w-full h-12" />
                   ) : (
                     <>
                       <Image
-                        src={data?.imageUrl}
+                        src={data?.data?.imageUrl}
                         alt=""
                         width={32}
                         height={32}
