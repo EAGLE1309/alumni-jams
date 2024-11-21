@@ -196,7 +196,7 @@ export function SidebarCustomTrigger() {
   return (
     <button
       onClick={toggleSidebar}
-      className="p-2 h-auto self-start bg-white/5 absolute top-2 left-2 ml-2 backdrop-blur-lg font-semibold flex items-center gap-2 lg:hidden rounded-md hover:bg-white/15"
+      className="p-2 h-auto self-start bg-white/5 sticky z-50 top-2 left-2 ml-2 backdrop-blur-lg font-semibold flex items-center gap-2 lg:hidden rounded-md hover:bg-white/15"
     >
       <PanelLeftClose /> Open Sidebar
     </button>

@@ -19,7 +19,7 @@ export default function Home() {
           across the globe, excelling in diverse fields.
         </p>
         <Button className="mt-8 text-md" asChild size="lg">
-          <Link href="/auth?state=signup">Register</Link>
+          <Link href="/register">Register</Link>
         </Button>
       </section>
       <section className="pt-8 pb-24 md:py-28 px-2 bg-[#181A1C]">
@@ -33,10 +33,7 @@ export default function Home() {
                 className="mt-5 px-12 text-md bg-white/5 font-semibold hover:bg-white/15"
                 size="lg"
               >
-                <Link
-                  className="flex items-center gap-2"
-                  href="/auth?state=signup"
-                >
+                <Link className="flex items-center gap-2" href="/register">
                   Register <ArrowUpRightIcon color="#0260f5" />
                 </Link>
               </Button>
@@ -49,10 +46,7 @@ export default function Home() {
                 className="mt-5 px-12 text-md bg-white/5 font-semibold hover:bg-white/15"
                 size="lg"
               >
-                <Link
-                  className="flex items-center gap-2"
-                  href="/auth?state=signin"
-                >
+                <Link className="flex items-center gap-2" href="login">
                   Login <ArrowUpRightIcon color="#0260f5" />
                 </Link>
               </Button>

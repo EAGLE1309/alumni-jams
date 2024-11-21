@@ -1,13 +1,15 @@
 "use client";
 
-import Home from "@/components/main/home";
-import { AppSidebar } from "@/components/main/app-sidebar";
-import { AuthsContext } from "@/context/AuthsContext";
-import { useContext, useEffect } from "react";
+import {
+  AppSidebar,
+  SidebarCustomTrigger,
+} from "@/components/main/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
-import { account } from "@/lib/appwrite/config";
+import { useContext, useEffect } from "react";
+import { AuthsContext } from "@/context/AuthsContext";
 
-export default function Page() {
+const Layout = ({ children }) => {
   const router = useRouter();
   const { currentUser, loading, logout } = useContext(AuthsContext);
 
@@ -30,9 +32,14 @@ export default function Page() {
   };
 
   return (
-    <>
+    <SidebarProvider>
       <AppSidebar data={currentUser} handleSignOut={signOutHandler} />
-      <main className="w-full"></main>
-    </>
+      <main className="bg-zinc-100 dark:bg-[#0D0D0D] w-full">
+        <SidebarCustomTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
   );
-}
+};
+
+export default Layout;
