@@ -12,7 +12,7 @@ export default function Page() {
         [&::-webkit-scrollbar-thumb]:rounded-full
         [&::-webkit-scrollbar-thumb]:bg-gray-300
         dark:[&::-webkit-scrollbar-track]:bg-neutral-800
-        dark:[&::-webkit-scrollbar-thumb]:bg-neutral-700 lg:min-w-[350px] lg:max-w-[350px] overflow-y-scroll h-full flex flex-col gap-3 bg-zinc-50 dark:bg-neutral-900 border-x-2 border-gray-200 dark:border-zinc-700 p-5"
+        dark:[&::-webkit-scrollbar-thumb]:bg-neutral-700 lg:min-w-[350px] lg:max-w-[350px] overflow-y-scroll h-full flex flex-col gap-3 bg-zinc-50 dark:bg-zinc-900 border-x-2 border-gray-200 dark:border-zinc-700 p-5"
       >
         <div className="w-full flex items-center justify-between">
           <h3 className="text-2xl font-bold">Chats</h3>

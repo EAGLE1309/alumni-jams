@@ -93,7 +93,7 @@ export default function SignUpCard() {
           Use your email or another service to continue
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-5 px-0 pb-0 ">
+      <CardContent className="space-y-5 px-0 pb-0 h-auto">
         <form className="space-y-2.5">
           <Input
             disabled={loading}
@@ -169,7 +169,6 @@ export default function SignUpCard() {
             Continue
           </Button>
         </form>
-
         <Separator />
 
         <div className="flex flex-col justify-between gap-y-2.5">
@@ -182,16 +181,6 @@ export default function SignUpCard() {
           >
             <FcGoogle className="size-5" />
             Continue with Google
-          </Button>
-          <Button
-            disabled={loading}
-            variant="outline"
-            className="w-full relative flex items-center"
-            size={"lg"}
-            onClick={() => {}}
-          >
-            <FaGithub className="size-5" />
-            Continue with Github
           </Button>
         </div>
         <p className="text-sm text-muted-foreground font-medium">

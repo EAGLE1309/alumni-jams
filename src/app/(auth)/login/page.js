@@ -126,16 +126,6 @@ export default function Login() {
             <FcGoogle className="size-5" />
             Continue with Google
           </Button>
-          <Button
-            disabled={loading}
-            variant="outline"
-            className="w-full relative flex items-center"
-            size={"lg"}
-            onClick={() => {}}
-          >
-            <FaGithub className="size-5" />
-            Continue with Github
-          </Button>
         </div>
         <p className="text-sm text-muted-foreground font-medium">
           Don&apos;t have an account?{" "}
