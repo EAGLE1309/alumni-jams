@@ -99,3 +99,9 @@ body {
     font-family: var(--font-satoshi);
   }
 }
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}

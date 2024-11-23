@@ -93,7 +93,7 @@ export const AuthsProvider = ({ children }) => {
       console.error("Error logging out:", error);
     }
   };
-  const register = async (email, password, name, username) => {
+  const register = async (email, password, name, isAlumni, username) => {
     try {
       const userId = ID.unique();
       console.log("Generated userId:", userId);
@@ -112,7 +112,7 @@ export const AuthsProvider = ({ children }) => {
           name,
           email,
           username,
-          isAlumni: false,
+          isAlumni,
           imageUrl: avatarUrl,
         }
       );

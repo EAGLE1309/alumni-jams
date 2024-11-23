@@ -15,6 +15,14 @@ module.exports = {
       heading: ["var(--font-source-serif)"],
     },
     extend: {
+      animation: {
+        border: "border 4s linear infinite",
+      },
+      keyframes: {
+        border: {
+          to: { "--border-angle": "360deg" },
+        },
+      },
       backgroundImage: {
         "home-bgs": "url('../assets/background-image.png')",
       },

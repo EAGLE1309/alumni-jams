@@ -63,7 +63,7 @@ const items = [
   },
   {
     title: "Chats",
-    url: "#",
+    url: "/chats",
     icon: MessageSquareText,
   },
   {
@@ -111,9 +111,9 @@ export function AppSidebar({ data, handleSignOut }) {
       <SidebarFooter>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="mb-2 bg-white/5 rounded-lg">
-              <SidebarMenuItem className="py-0 px-2">
-                <SidebarMenuButton className="h-auto">
+            <SidebarMenu className="mb-2 bg-black/5 dark:bg-white/5 rounded-lg">
+              <SidebarMenuItem className="py-0 px-2 transition-all rounded-lg hover:bg-black/15 dark:hover:bg-white/15">
+                <SidebarMenuButton className="h-auto hover:bg-transparent">
                   {data?.name === "" ? (
                     <Skeleton className="w-full h-12" />
                   ) : (
@@ -123,11 +123,11 @@ export function AppSidebar({ data, handleSignOut }) {
                         alt=""
                         width={32}
                         height={32}
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full bg-white"
                       />
-                      <div className="flex flex-col items-start justify-center py-2">
-                        <span>{data?.name}</span>
-                        <span className="text-sm text-gray-400">
+                      <div className="flex flex-col  items-start justify-center py-2">
+                        <span className="font-semibold">{data?.name}</span>
+                        <span className="text-sm text-gray-700 dark:text-gray-400">
                           {data?.email}
                         </span>
                       </div>
@@ -136,7 +136,7 @@ export function AppSidebar({ data, handleSignOut }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
-            <Separator className="bg-white/5" />
+            <Separator className="w-full bg-zinc-200 dark:bg-white/5" />
 
             <SidebarMenu className="mt-2">
               <SidebarMenuItem>
