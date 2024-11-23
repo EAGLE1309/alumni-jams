@@ -14,6 +14,7 @@ import {
   Sun,
   User,
   GraduationCap,
+  ShieldCheck,
 } from "lucide-react";
 
 import {
@@ -110,7 +111,22 @@ export function AppSidebar({ data, handleSignOut }) {
       </SidebarContent>
       <SidebarFooter>
         <SidebarGroup>
-          <SidebarGroupContent>
+          <SidebarGroupContent className="flex flex-col items-start gap-3 noselect">
+            {data?.data.isAlumni ? (
+              <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
+                <p className="flex gap-1 text-sm rounded-full">
+                  Alumni
+                  <ShieldCheck className="size-5 text-green-500" />
+                </p>
+              </div>
+            ) : (
+              <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
+                <p className="flex gap-1 text-sm rounded-full">
+                  Student
+                  <ShieldCheck className="size-5 text-blue-500" />
+                </p>
+              </div>
+            )}
             <SidebarMenu className="mb-2 bg-black/5 dark:bg-white/5 rounded-lg">
               <SidebarMenuItem className="py-0 px-2 transition-all rounded-lg hover:bg-black/15 dark:hover:bg-white/15">
                 <SidebarMenuButton className="h-auto hover:bg-transparent">

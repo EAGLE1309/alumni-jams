@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import { ShieldCheck } from "lucide-react";
 
 const SideBarProfile = ({ user }) => {
   return (
@@ -15,8 +16,15 @@ const SideBarProfile = ({ user }) => {
           height={82}
         />
         <div className="flex flex-col items-center">
-          <h1 className="text-2xl font-bold">{user?.data?.name}</h1>
-          <p className="text-sm text-zinc-400">{user?.data?.username}</p>
+          <div className="flex items-center gap-1">
+            <h1 className="text-2xl font-bold">{user?.data?.name}</h1>
+            {user?.data?.isAlumni ? (
+              <ShieldCheck className="size-5 text-green-500" />
+            ) : (
+              <ShieldCheck className="size-5 text-blue-500" />
+            )}
+          </div>
+          <p className="text-sm text-zinc-400">@{user?.data?.username}</p>
         </div>
         <Separator className="w-[75%] my-2 bg-zinc-800" />
         <p className="text-sm max-w-[75%] text-center text-zinc-400">

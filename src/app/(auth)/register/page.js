@@ -139,25 +139,6 @@ export default function SignUpCard() {
               {showPassword ? <Eye /> : <EyeOff />}
             </Button>
           </div>
-          {/*<div
-            className={`flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow ${
-              loading ? "opacity-50 cursor-not-allowed" : "opcaity-100"
-            }`}
-          >
-            <Checkbox
-              checked={isAlumni}
-              onCheckedChange={(e) => setIsAlumni(e)}
-              required
-            />
-            <div className="space-y-1 leading-none">
-              <Label>Are you an Alumni?</Label>
-              <p className="text-sm text-muted-foreground">
-                If information filled above is fake, your account will be
-                deleted upon verification state.
-              </p>
-            </div>
-          </div>
-          */}
           <div className="[background:linear-gradient(45deg,theme(colors.zinc.900),theme(colors.zinc.800)_50%,theme(colors.zinc.900))_padding-box,conic-gradient(from_var(--border-angle),theme(colors.zinc.600/.48)_80%,_theme(colors.zinc.500)_86%,_theme(colors.zinc.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.blue.600/.48))_border-box] rounded-xl border border-transparent animate-border">
             {" "}
             <div
