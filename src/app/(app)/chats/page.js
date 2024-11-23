@@ -1,6 +1,7 @@
 import { UserRoundPlus } from "lucide-react";
 import Image from "next/image";
 import TextBox from "@/components/chats/textbox";
+import Search from "@/components/chats/search";
 
 export default function Page() {
   return (
@@ -16,9 +17,7 @@ export default function Page() {
       >
         <div className="w-full flex items-center justify-between">
           <h3 className="text-2xl font-bold">Chats</h3>
-          <div className="p-2 inline-flex items-center justify-center bg-gray-200 hover:bg-gray-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-full transition-all border-2 border-gray-300 dark:border-zinc-700 cursor-pointer">
-            <UserRoundPlus className="text-gray-500 dark:text-white size-5" />
-          </div>
+          <Search />
         </div>
         <div className="w-full flex flex-col gap-2 divide-y-2">
           {Array.from({ length: 10 }).map((_, index) => (

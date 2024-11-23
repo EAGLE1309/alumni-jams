@@ -7,6 +7,10 @@ export const appwriteConfig = {
   databaseId: process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID, // database
   storageId: process.env.NEXT_PUBLIC_APPWRITE_STORAGE_ID, // storage (2GB Limits)
   userCollectionId: process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID, // users collection
+  jobCollectionId: process.env.NEXT_PUBLIC_APPWRITE_JOB_COLLECTION_ID,
+  userChatsCollectionId:
+    process.env.NEXT_PUBLIC_APPWRITE_USER_CHATS_COLLECTION_ID,
+  chatsCollectionId: process.env.NEXT_PUBLIC_APPWRITE_CHATS_COLLECTION_ID,
 };
 export const client = new Client();
 

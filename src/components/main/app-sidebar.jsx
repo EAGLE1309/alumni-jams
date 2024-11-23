@@ -112,7 +112,7 @@ export function AppSidebar({ data, handleSignOut }) {
       <SidebarFooter>
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col items-start gap-3 noselect">
-            {data?.data.isAlumni ? (
+            {data?.data?.isAlumni ? (
               <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
                 <p className="flex gap-1 text-sm rounded-full">
                   Alumni
