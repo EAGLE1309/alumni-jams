@@ -7,16 +7,24 @@ import { useContext } from "react";
 const Chats = () => {
   const { currentUser } = useContext(AuthsContext);
 
+  console.log(currentUser?.data?.userChats);
+
   return (
     <div className="w-full flex flex-col gap-2 divide-y-2">
-      {currentUser?.data?.userChats.map((data, index) => (
-        <Chat
-          key={index}
-          lastMessage={data?.lastMessage || "Hello, this is a message."}
-          imageUrl={data?.imageUrl}
-          name={data?.name}
-        />
-      ))}
+      {currentUser?.data?.userChats.length > 0 ? (
+        currentUser?.data?.userChats.map((data, index) => (
+          <Chat
+            key={index}
+            lastMessage={data?.lastMessage || "Hello, this is a message."}
+            imageUrl={data?.imageUrl}
+            name={data?.name}
+          />
+        ))
+      ) : (
+        <p className="text-md text-neutral-600 dark:text-neutral-300">
+          No chats here, start a conversation
+        </p>
+      )}
     </div>
   );
 };

@@ -73,6 +73,11 @@ const Search = () => {
     try {
       toast.info("Creating a new conversation");
 
+      if (!currentUser?.data?.isAlumni) {
+        toast.error("Only Alumni can create a new conversation");
+        throw new Error("Only Alumni can create a new conversation");
+      }
+
       const combinedId =
         userData.$id > currentUser.$id
           ? userData.$id + currentUser.$id
