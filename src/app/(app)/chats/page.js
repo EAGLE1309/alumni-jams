@@ -1,7 +1,6 @@
-import { UserRoundPlus } from "lucide-react";
-import Image from "next/image";
 import TextBox from "@/components/chats/textbox";
 import Search from "@/components/chats/search";
+import Chats from "@/components/chats/chats";
 
 export default function Page() {
   return (
@@ -19,45 +18,21 @@ export default function Page() {
           <h3 className="text-2xl font-bold">Chats</h3>
           <Search />
         </div>
-        <div className="w-full flex flex-col gap-2 divide-y-2">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <Chats key={index} />
-          ))}
-        </div>
+        <Chats />
       </div>
       <div className="ml-[350px] w-full h-full flex flex-col justify-between">
         <div className="px-5 flex flex-col gap-5 mt-5">
-          <Chat message={"This is a damn message"} />
-          <Chat message={"This is a damn message"} />
-          <Chat message={"This is a damn message"} />
-          <Chat message={"This is a damn message"} />
-          <Chat message={"This is a damn message"} />
+          <Chat message="Hello, this is a damn message." />
+          <Chat message="Hello, this is a damn message." />
+          <Chat message="Hello, this is a damn message." />
+          <Chat message="Hello, this is a damn message." />
+          <Chat message="Hello, this is a damn message." />
         </div>
         <TextBox />
       </div>
     </div>
   );
 }
-
-const Chats = () => {
-  return (
-    <div className="w-full p-2 rounded-md hover:bg-gray-200 dark:hover:bg-zinc-800 flex items-center cursor-pointer gap-2.5">
-      <Image
-        className="rounded-full object-cover"
-        src="https://api.dicebear.com/9.x/bottts-neutral/png"
-        alt="Chats"
-        width={51}
-        height={51}
-      />
-      <div className="flex flex-col">
-        <h3 className="text-lg font-bold">John Doe</h3>
-        <p className="text-md text-neutral-600 dark:text-neutral-300">
-          Hello there guys
-        </p>
-      </div>
-    </div>
-  );
-};
 
 const Chat = ({ message }) => {
   return (

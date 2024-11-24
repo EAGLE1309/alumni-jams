@@ -63,7 +63,7 @@ export const AuthsProvider = ({ children }) => {
     fetchCurrentUser();
 
     // Listen for session changes
-    const unsubscribe = client.subscribe("account", async (event) => {
+    const accountUnsubscribe = client.subscribe("account", async (event) => {
       if (
         event.events.includes("users.sessions.create") ||
         event.events.includes("users.sessions.delete")
@@ -72,8 +72,42 @@ export const AuthsProvider = ({ children }) => {
       }
     });
 
-    return () => unsubscribe();
-  }, [fetchCurrentUser]);
+    let userDocumentUnsubscribe;
+    if (currentUser?.$id) {
+      // Subscribe to user document updates
+      userDocumentUnsubscribe = client.subscribe(
+        `databases.${appwriteConfig.databaseId}.collections.${appwriteConfig.userCollectionId}.documents.${currentUser.$id}`,
+        async (event) => {
+          if (event.events.includes("databases.*.documents.*.update")) {
+            const updatedUserData = await fetchUserData(currentUser.$id);
+            setCurrentUser((prev) => ({
+              ...prev,
+              data: updatedUserData,
+            }));
+          }
+        }
+      );
+    }
+
+    return () => {
+      accountUnsubscribe();
+      if (userDocumentUnsubscribe) {
+        userDocumentUnsubscribe();
+      }
+    };
+  }, [fetchCurrentUser, currentUser?.$id, fetchUserData]);
+
+  const updateContext = async (accountId) => {
+    try {
+      const userData = await fetchUserData(accountId || currentUser?.$id);
+      setCurrentUser((prev) => ({
+        ...prev,
+        data: userData,
+      }));
+    } catch (error) {
+      console.error("Error updating context:", error);
+    }
+  };
 
   const login = async (email, password) => {
     try {
@@ -93,6 +127,7 @@ export const AuthsProvider = ({ children }) => {
       console.error("Error logging out:", error);
     }
   };
+
   const register = async (email, password, name, isAlumni, username) => {
     try {
       const userId = ID.unique();
@@ -126,7 +161,7 @@ export const AuthsProvider = ({ children }) => {
 
   return (
     <AuthsContext.Provider
-      value={{ currentUser, loading, login, logout, register }}
+      value={{ currentUser, loading, updateContext, login, logout, register }}
     >
       {!loading && children}
     </AuthsContext.Provider>
