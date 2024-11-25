@@ -1,11 +1,17 @@
 "use client";
 
 import { AuthsContext } from "@/context/AuthsContext";
+import { ChatsContext } from "@/context/ChatsContext";
 import Image from "next/image";
 import { useContext } from "react";
 
 const Chats = () => {
   const { currentUser } = useContext(AuthsContext);
+  const { dispatch } = useContext(ChatsContext);
+
+  const handleSelect = (user) => {
+    dispatch({ type: "CHANGE_USER", payload: user });
+  };
 
   console.log(currentUser?.data?.userChats);
 
@@ -18,6 +24,7 @@ const Chats = () => {
             lastMessage={data?.lastMessage || "Hello, this is a message."}
             imageUrl={data?.imageUrl}
             name={data?.name}
+            onClick={() => handleSelect(data)}
           />
         ))
       ) : (
@@ -29,9 +36,12 @@ const Chats = () => {
   );
 };
 
-const Chat = ({ lastMessage, imageUrl, name }) => {
+const Chat = ({ lastMessage, imageUrl, onClick, name }) => {
   return (
-    <div className="w-full p-2 rounded-md hover:bg-gray-200 dark:hover:bg-zinc-800 flex items-center cursor-pointer gap-2.5">
+    <div
+      onClick={() => onClick()}
+      className="w-full p-2 rounded-md hover:bg-gray-200 dark:hover:bg-zinc-800 flex items-center cursor-pointer gap-2.5"
+    >
       <Image
         className="rounded-full object-cover"
         src={imageUrl}

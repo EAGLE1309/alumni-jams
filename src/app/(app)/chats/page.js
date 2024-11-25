@@ -1,6 +1,7 @@
 import TextBox from "@/components/chats/textbox";
 import Search from "@/components/chats/search";
 import Chats from "@/components/chats/chats";
+import Chat from "@/components/chats/chat";
 
 export default function Page() {
   return (
@@ -21,21 +22,9 @@ export default function Page() {
         <Chats />
       </div>
       <div className="ml-[350px] w-full h-full flex flex-col justify-between">
-        <div className="px-5 flex flex-col gap-5 mt-5">
-          <Chat message="Hello, this is a damn message." />
-          <Chat message="Hello, this is a damn message." />
-          <Chat message="Hello, this is a damn message." />
-          <Chat message="Hello, this is a damn message." />
-          <Chat message="Hello, this is a damn message." />
-        </div>
+        <Chat />
         <TextBox />
       </div>
     </div>
   );
 }
-
-const Chat = ({ message }) => {
-  return (
-    <div className="self-start p-2 bg-zinc-800 rounded-lg px-5">{message}</div>
-  );
-};

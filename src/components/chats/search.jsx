@@ -18,6 +18,7 @@ import Image from "next/image";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
 import { AuthsContext } from "@/context/AuthsContext";
+import { ChatsContext } from "@/context/ChatsContext";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,6 +30,7 @@ const Search = () => {
 
   const { currentUser: currentUserData, updateContext } =
     useContext(AuthsContext);
+  const { dispatch } = useContext(ChatsContext);
 
   useEffect(() => {
     setCurrentUser(currentUserData);
@@ -71,6 +73,8 @@ const Search = () => {
     e.preventDefault();
 
     try {
+      dispatch({ type: "CHANGE_USER", payload: userData });
+
       toast.info("Creating a new conversation");
 
       if (!currentUser?.data?.isAlumni) {

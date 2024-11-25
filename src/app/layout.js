@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthsProvider } from "@/context/AuthsContext";
+import { ChatProvider } from "@/context/ChatsContext";
 
 const satoshi = localFont({
   src: [
@@ -49,8 +50,10 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <AuthsProvider>
-            {children}
-            <Toaster richColors />
+            <ChatProvider>
+              {children}
+              <Toaster richColors />
+            </ChatProvider>
           </AuthsProvider>
         </ThemeProvider>
       </body>
