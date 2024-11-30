@@ -78,7 +78,12 @@ export const AuthsProvider = ({ children }) => {
       userDocumentUnsubscribe = client.subscribe(
         `databases.${appwriteConfig.databaseId}.collections.${appwriteConfig.userCollectionId}.documents.${currentUser.$id}`,
         async (event) => {
-          if (event.events.includes("databases.*.documents.*.update")) {
+          console.log(event);
+          if (
+            event.events.includes(
+              "databases.*.collections.*.documents.*.update"
+            )
+          ) {
             const updatedUserData = await fetchUserData(currentUser.$id);
             setCurrentUser((prev) => ({
               ...prev,
@@ -91,9 +96,7 @@ export const AuthsProvider = ({ children }) => {
 
     return () => {
       accountUnsubscribe();
-      if (userDocumentUnsubscribe) {
-        userDocumentUnsubscribe();
-      }
+      userDocumentUnsubscribe?.();
     };
   }, [fetchCurrentUser, currentUser?.$id, fetchUserData]);
 

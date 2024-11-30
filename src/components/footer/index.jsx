@@ -32,9 +32,14 @@ const Footer = () => {
         <CTABox />
         <div className="h-auto w-full text-gray-100 lg:mx-auto max-w-screen-xl flex flex-col md:flex-row gap-4 justify-between items-start">
           <div className="flex flex-col gap-8 lg:gap-0 items-start text-left">
-            <h1 className="text-4xl pb-7 font-heading leading-0 mt-[-0.45rem]">
+            <h1 className="text-4xl font-heading font-semibold leading-0 mt-[-0.45rem]">
               Alumni Jams
             </h1>
+            <img
+              src="https://ik.imagekit.io/eagledev/idks_tHjYdfbX3j.png?updatedAt=1732958779341"
+              className="h-16 md:h-[85px] py-3 md:py-5"
+              alt="logo"
+            />
             <p className="text-gray-500 max-w-[248px]">
               {`Empowering academic excellence through a digital platform.`}
             </p>

@@ -89,6 +89,7 @@ const Search = () => {
 
       const currentTime = new Date().toISOString();
 
+      // For the logged in user
       const updatedUserChats = [...currentUser.data.userChats];
 
       updatedUserChats.push({
@@ -100,6 +101,19 @@ const Search = () => {
         timestamp: currentTime,
       });
 
+      // For the logged in user
+      const updatedUserChats2 = [...userData.userChats];
+
+      updatedUserChats2.push({
+        userId: currentUser.$id,
+        username: currentUser.data.username,
+        imageUrl: currentUser.data.imageUrl,
+        name: currentUser.data.name,
+        chatId: combinedId,
+        timestamp: currentTime,
+      });
+
+      // Set the updated userChats array in logged in user
       const res = await databases.updateDocument(
         appwriteConfig.databaseId,
         appwriteConfig.userCollectionId,
@@ -109,9 +123,20 @@ const Search = () => {
         }
       );
 
+      // Set the updated userChats array in searched user
+      const res2 = await databases.updateDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.userCollectionId,
+        userData.$id,
+        {
+          userChats: updatedUserChats2,
+        }
+      );
+
+      // Update the context for the logged in user
       await updateContext();
 
-      console.log(res);
+      console.log(res2);
 
       toast.success("Conversation created successfully");
     } catch (error) {

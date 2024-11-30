@@ -21,10 +21,7 @@ export default function Page() {
         </div>
         <Chats />
       </div>
-      <div className="ml-[350px] w-full h-full flex flex-col justify-between">
-        <Chat />
-        <TextBox />
-      </div>
+      <Chat />
     </div>
   );
 }
