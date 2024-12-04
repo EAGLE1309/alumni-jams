@@ -5,12 +5,15 @@ import { ChatsContext } from "@/context/ChatsContext";
 import Image from "next/image";
 import { useContext } from "react";
 
-const Chats = () => {
+/*==========[CHATS LISTS]========== */
+
+const Chats = ({ onClick = () => {} }) => {
   const { currentUser } = useContext(AuthsContext);
   const { dispatch } = useContext(ChatsContext);
 
   const handleSelect = (user) => {
     dispatch({ type: "CHANGE_USER", payload: user });
+    onClick();
   };
 
   console.log(currentUser?.data?.userChats);
@@ -36,6 +39,7 @@ const Chats = () => {
   );
 };
 
+/*==========[CHAT ITEM]========== */
 const Chat = ({ lastMessage, imageUrl, onClick, name }) => {
   return (
     <div
