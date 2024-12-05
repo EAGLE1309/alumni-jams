@@ -15,17 +15,12 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 import { useContext, useEffect, useState } from "react";
-import { Eye, EyeOff, Image } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { AuthsContext } from "@/context/AuthsContext";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import {
-  account,
-  appwriteConfig,
-  avatars,
-  databases,
-} from "@/lib/appwrite/config";
-import { ID } from "appwrite";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function SignUpCard() {
   const router = useRouter();
@@ -44,6 +39,7 @@ export default function SignUpCard() {
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [isAlumni, setIsAlumni] = useState(false);
   const [password, setPassword] = useState("");
 
   /*========[NOTFICATION SYSTEM]========*/
@@ -74,7 +70,7 @@ export default function SignUpCard() {
         throw new Error("Password must be at least 8 characters.");
       }
 
-      await register(email, password, name, username);
+      await register(email, password, name, isAlumni, username);
 
       /*=====[ Set loading to false & navigate to home ]=====*/
       setLoading(false);
@@ -90,14 +86,14 @@ export default function SignUpCard() {
   };
 
   return (
-    <Card className="w-full h-full p-8 dark:bg-zinc-900">
+    <Card className="relative w-full h-full p-8 dark:bg-zinc-900">
       <CardHeader className="px-0 pt-0">
         <CardTitle>Sign up to continue</CardTitle>
         <CardDescription>
           Use your email or another service to continue
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-5 px-0 pb-0 ">
+      <CardContent className="space-y-5 px-0 pb-0 h-auto">
         <form className="space-y-2.5">
           <Input
             disabled={loading}
@@ -115,6 +111,7 @@ export default function SignUpCard() {
             type="text"
             required
           />
+
           <Input
             disabled={loading}
             value={email}
@@ -142,6 +139,27 @@ export default function SignUpCard() {
               {showPassword ? <Eye /> : <EyeOff />}
             </Button>
           </div>
+          <div className="[background:linear-gradient(45deg,theme(colors.zinc.900),theme(colors.zinc.800)_50%,theme(colors.zinc.900))_padding-box,conic-gradient(from_var(--border-angle),theme(colors.zinc.600/.48)_80%,_theme(colors.zinc.500)_86%,_theme(colors.zinc.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.blue.600/.48))_border-box] rounded-xl border border-transparent animate-border">
+            {" "}
+            <div
+              className={`relative flex flex-row items-start space-x-3 space-y-0 rounded-xl border p-4 ${
+                loading ? "opacity-50 cursor-not-allowed" : "opcaity-100"
+              }`}
+            >
+              <Checkbox
+                checked={isAlumni}
+                onCheckedChange={(e) => setIsAlumni(e)}
+                required
+              />
+              <div className="space-y-1 leading-none">
+                <Label>Are you an Alumni?</Label>
+                <p className="text-sm text-muted-foreground">
+                  If information filled above is fake, your account will be
+                  deleted upon verification state.
+                </p>
+              </div>
+            </div>
+          </div>
           <Button
             onClick={(e) => handleSubmit(e)}
             className="w-full"
@@ -151,7 +169,6 @@ export default function SignUpCard() {
             Continue
           </Button>
         </form>
-
         <Separator />
 
         <div className="flex flex-col justify-between gap-y-2.5">
@@ -164,16 +181,6 @@ export default function SignUpCard() {
           >
             <FcGoogle className="size-5" />
             Continue with Google
-          </Button>
-          <Button
-            disabled={loading}
-            variant="outline"
-            className="w-full relative flex items-center"
-            size={"lg"}
-            onClick={() => {}}
-          >
-            <FaGithub className="size-5" />
-            Continue with Github
           </Button>
         </div>
         <p className="text-sm text-muted-foreground font-medium">

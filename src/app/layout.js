@@ -2,10 +2,10 @@ import { Source_Serif_4 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "sonner";
-import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { QueryProvider } from "@/components/providers/query-provider";
 import { AuthsProvider } from "@/context/AuthsContext";
+import { ChatProvider } from "@/context/ChatsContext";
+import { UtilityProvider } from "@/context/UtilityContext";
 
 const satoshi = localFont({
   src: [
@@ -51,10 +51,12 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <AuthsProvider>
-            <QueryProvider>
-              <AuthProvider>{children}</AuthProvider>
-              <Toaster richColors />
-            </QueryProvider>
+            <ChatProvider>
+              <UtilityProvider>
+                {children}
+                <Toaster richColors />
+              </UtilityProvider>
+            </ChatProvider>
           </AuthsProvider>
         </ThemeProvider>
       </body>

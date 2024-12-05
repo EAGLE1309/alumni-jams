@@ -32,10 +32,10 @@ const Navbar = () => {
               Events
             </Button>
             <Button className="text-white" asChild>
-              <Link href="/auth?state=signin">Login</Link>
+              <Link href="login">Login</Link>
             </Button>
             <Button className="text-white" asChild>
-              <Link href="/auth?state=signup">Register</Link>
+              <Link href="/register">Register</Link>
             </Button>
           </div>
 
@@ -48,7 +48,7 @@ const Navbar = () => {
               variant={"default"}
               asChild
             >
-              <Link href="/auth?state=signup">Sign Up</Link>
+              <Link href="/register">Sign Up</Link>
             </Button>
             <Button
               onClick={() => setOpen(!open)}

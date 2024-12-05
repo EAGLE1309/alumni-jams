@@ -14,6 +14,7 @@ import {
   Sun,
   User,
   GraduationCap,
+  ShieldCheck,
 } from "lucide-react";
 
 import {
@@ -63,7 +64,7 @@ const items = [
   },
   {
     title: "Chats",
-    url: "#",
+    url: "/chats",
     icon: MessageSquareText,
   },
   {
@@ -110,10 +111,25 @@ export function AppSidebar({ data, handleSignOut }) {
       </SidebarContent>
       <SidebarFooter>
         <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu className="mb-2 bg-white/5 rounded-lg">
-              <SidebarMenuItem className="py-0 px-2">
-                <SidebarMenuButton className="h-auto">
+          <SidebarGroupContent className="flex flex-col items-start gap-3 noselect">
+            {data?.data?.isAlumni ? (
+              <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
+                <p className="flex gap-1 text-sm rounded-full">
+                  Alumni
+                  <ShieldCheck className="size-5 text-green-500" />
+                </p>
+              </div>
+            ) : (
+              <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
+                <p className="flex gap-1 text-sm rounded-full">
+                  Student
+                  <ShieldCheck className="size-5 text-blue-500" />
+                </p>
+              </div>
+            )}
+            <SidebarMenu className="mb-2 bg-black/5 dark:bg-white/5 rounded-lg">
+              <SidebarMenuItem className="py-0 px-2 transition-all rounded-lg hover:bg-black/15 dark:hover:bg-white/15">
+                <SidebarMenuButton className="h-auto hover:bg-transparent">
                   {data?.name === "" ? (
                     <Skeleton className="w-full h-12" />
                   ) : (
@@ -123,11 +139,11 @@ export function AppSidebar({ data, handleSignOut }) {
                         alt=""
                         width={32}
                         height={32}
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full bg-white"
                       />
-                      <div className="flex flex-col items-start justify-center py-2">
-                        <span>{data?.name}</span>
-                        <span className="text-sm text-gray-400">
+                      <div className="flex flex-col  items-start justify-center py-2">
+                        <span className="font-semibold">{data?.name}</span>
+                        <span className="text-sm text-gray-700 dark:text-gray-400">
                           {data?.email}
                         </span>
                       </div>
@@ -136,7 +152,7 @@ export function AppSidebar({ data, handleSignOut }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
-            <Separator className="bg-white/5" />
+            <Separator className="w-full bg-zinc-200 dark:bg-white/5" />
 
             <SidebarMenu className="mt-2">
               <SidebarMenuItem>
@@ -196,7 +212,7 @@ export function SidebarCustomTrigger() {
   return (
     <button
       onClick={toggleSidebar}
-      className="p-2 h-auto self-start bg-white/5 absolute top-2 left-2 ml-2 backdrop-blur-lg font-semibold flex items-center gap-2 lg:hidden rounded-md hover:bg-white/15"
+      className="p-2 h-auto self-start bg-white/5 sticky z-50 top-2 left-2 ml-2 backdrop-blur-lg font-semibold flex items-center gap-2 lg:hidden rounded-md hover:bg-white/15"
     >
       <PanelLeftClose /> Open Sidebar
     </button>
