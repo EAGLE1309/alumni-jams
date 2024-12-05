@@ -60,7 +60,7 @@ const Reasearch = () => {
         <div className="flex rounded-xl mt-5 w-full border-[1px] border-zinc-700 bg-white/5 items-center justify-center">
           <img
             className="h-12"
-            src="https://gdscmpstme.com/images/gdsc-logo.png"
+            src="https://developers.google.com/static/community/images/colored-brackets_72.png"
             alt="google"
           />
         </div>

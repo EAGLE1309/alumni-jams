@@ -26,13 +26,13 @@ const Navbar = () => {
           </h1>
           <div className="gap-4 hidden md:flex items-center">
             <Button className="text-white" variant={"ghost"}>
-              About
+              <Link href="/about">About</Link>
             </Button>
             <Button className="text-white" variant={"ghost"}>
               Events
             </Button>
             <Button className="text-white" asChild>
-              <Link href="login">Login</Link>
+              <Link href="/login">Login</Link>
             </Button>
             <Button className="text-white" asChild>
               <Link href="/register">Register</Link>
