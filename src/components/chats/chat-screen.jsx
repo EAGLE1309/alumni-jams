@@ -5,18 +5,21 @@ import Image from "next/image";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import TextBox from "./textbox";
 import { useResizeObserver } from "@/hooks/use-resize-observer";
-import { useScrollToBottom } from "@/hooks/scroll-to-bottom";
 import { cn } from "@/lib/utils";
+import { UtilityContext } from "@/context/UtilityContext";
+import { ArrowLeft } from "lucide-react";
+import useViewport from "@/hooks/useViewport";
 
 /*==========[CHAT SCREEN]========== */
 
-const ChatScreen = () => {
-  const { chatId, data } = useContext(ChatsContext);
+const ChatScreen = ({ onClick }) => {
+  const { chatId, data, dispatch } = useContext(ChatsContext);
 
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const { ref, width } = useResizeObserver();
-  const { scrollRef, scrollToBottom } = useScrollToBottom();
+  const { breakpoint } = useViewport();
+  const { scrollRef, scrollToBottom } = useContext(UtilityContext);
 
   if (isChatOpen) scrollToBottom();
 
@@ -31,6 +34,14 @@ const ChatScreen = () => {
   useEffect(() => {
     scrollToBottom();
   }, [data]);
+
+  const handleClose = () => {
+    if (breakpoint == "lg" || breakpoint == "xl" || breakpoint == "2xl") {
+      dispatch({ type: "CHANGE_USER", payload: {} });
+    } else {
+      onClick();
+    }
+  };
 
   return (
     <div
@@ -53,17 +64,25 @@ const ChatScreen = () => {
       ) : (
         <>
           <div
-            className="self-start w-full fixed top-0 py-3 overflow-y-hidden inline-flex gap-5 items-center bg-zinc-800 px-5"
+            className="self-start w-full fixed top-0 py-3 overflow-y-hidden inline-flex gap-5 items-center justify-between bg-zinc-800 px-5"
             style={{ width: `${width}px` }}
           >
-            <Image
-              className="rounded-full"
-              src={data?.user?.imageUrl}
-              alt="Chats"
-              width={45}
-              height={45}
-            />
-            <h2 className="text-lg font-semibold">{data?.user?.name}</h2>
+            <div className="inline-flex items-center gap-5">
+              <Image
+                className="rounded-full"
+                src={data?.user?.imageUrl}
+                alt="Chats"
+                width={45}
+                height={45}
+              />
+              <h2 className="text-lg font-semibold">{data?.user?.name}</h2>
+            </div>
+            <div
+              className="p-2 cursor-pointer bg-zinc-700 hover:bg-zinc-600 transition-all rounded-full inline-flex items-center justify-center"
+              onClick={() => handleClose()}
+            >
+              <ArrowLeft />
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5 px-5 w-full h-full mt-[96px] mb-20">

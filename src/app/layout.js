@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthsProvider } from "@/context/AuthsContext";
 import { ChatProvider } from "@/context/ChatsContext";
+import { UtilityProvider } from "@/context/UtilityContext";
 
 const satoshi = localFont({
   src: [
@@ -51,8 +52,10 @@ export default function RootLayout({ children }) {
         >
           <AuthsProvider>
             <ChatProvider>
-              {children}
-              <Toaster richColors />
+              <UtilityProvider>
+                {children}
+                <Toaster richColors />
+              </UtilityProvider>
             </ChatProvider>
           </AuthsProvider>
         </ThemeProvider>
