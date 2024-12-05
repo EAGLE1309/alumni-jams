@@ -9,7 +9,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    feedback: "", // Add feedback field
+    message: "",
   });
 
   const handleInputChange = (e) => {
@@ -22,22 +22,29 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here, you can add form submission logic like API calls or email sending
+    // Here you can add form submission logic, like sending the form data to an API
     console.log("Form submitted", formData);
+    // Clear form data after submission
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
-    <Card className="w-full h-full p-8 dark:bg-zinc-900">
+    <Card className="w-full min-h-[700px] mx-auto p-8 dark:bg-zinc-900">
       <CardHeader className="px-0 pt-0">
-        <CardTitle className="text-2xl font-bold dark:text-white">Contact Us</CardTitle>
-        <CardDescription className="text-gray-500 dark:text-gray-300">
+        <CardTitle className="text-3xl font-bold dark:text-white">Contact Us</CardTitle>
+        <CardDescription className="text-gray-500 dark:text-gray-300 mt-2 text-lg">
           We’d love to hear from you! Please reach out with any questions or feedback.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-5 px-0 pb-0">
-        <h2 className="text-2xl font-bold text-blue-400 dark:text-blue-300 mb-4">Get in Touch</h2>
+      <CardContent className="space-y-8 mt-6 px-0">
+        <section>
+          <h2 className="text-2xl font-bold text-blue-400 dark:text-blue-300 mb-4">Get in Touch</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+            Whether you have questions about our platform, need support, or just want to say hello, we're here to help!
+          </p>
+        </section>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <Input
               type="text"
@@ -62,22 +69,31 @@ export default function Contact() {
 
           <div>
             <textarea
-              name="feedback"
-              placeholder="Your Feedback"
-              value={formData.feedback}
+              name="message"
+              placeholder="Your Message"
+              value={formData.message}
               onChange={handleInputChange}
-              className="w-full p-3 dark:bg-zinc-800 dark:text-white"
-              rows="4"
+              className="w-full p-3 dark:bg-zinc-800 dark:text-white border rounded-md"
+              rows="5"
             />
           </div>
 
-          <div className="mt-5">
+          <div>
             <Button type="submit" className="w-full" size="lg">
               Send Message
             </Button>
           </div>
         </form>
       </CardContent>
+      <div className="mt-4 space-y-2">
+        <Button
+          onClick={() => window.location.href = "/"}
+          className="w-full"
+          size="lg"
+        >
+          Go Back to Home
+        </Button>
+      </div>
     </Card>
   );
 }
