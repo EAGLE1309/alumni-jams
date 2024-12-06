@@ -25,7 +25,7 @@ export default function About() {
                 fostering collaboration and building meaningful connections.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-                Whether you're a recent graduate or an experienced professional, Alumni Jams offers resources to stay
+                Whether you&pos;re a recent graduate or an experienced professional, Alumni Jams offers resources to stay
                 informed, share insights, and create opportunities that benefit both alumni and the broader community.
               </p>
             </section>
