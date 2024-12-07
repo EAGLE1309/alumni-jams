@@ -24,7 +24,9 @@ const Chats = ({ onClick = () => {} }) => {
         currentUser?.data?.userChats.map((data, index) => (
           <Chat
             key={index}
-            lastMessage={data?.lastMessage || "Hello, this is a message."}
+            lastMessage={
+              data?.userChats?.lastMessage || "Hello, this is a message."
+            }
             imageUrl={data?.imageUrl}
             name={data?.name}
             onClick={() => handleSelect(data)}

@@ -2,20 +2,23 @@
 
 import { ChatsContext } from "@/context/ChatsContext";
 import Image from "next/image";
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TextBox from "./textbox";
 import { useResizeObserver } from "@/hooks/use-resize-observer";
 import { cn } from "@/lib/utils";
 import { UtilityContext } from "@/context/UtilityContext";
 import { ArrowLeft } from "lucide-react";
 import useViewport from "@/hooks/useViewport";
+import { appwriteConfig, databases } from "@/lib/appwrite/config";
+import { Query } from "appwrite";
 
 /*==========[CHAT SCREEN]========== */
 
 const ChatScreen = ({ onClick }) => {
-  const { chatId, data, dispatch } = useContext(ChatsContext);
+  const { data, dispatch } = useContext(ChatsContext);
 
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [messages, setMessages] = useState(null);
 
   const { ref, width } = useResizeObserver();
   const { breakpoint } = useViewport();
@@ -42,6 +45,31 @@ const ChatScreen = ({ onClick }) => {
       onClick();
     }
   };
+
+  // FETCH CHATS FROM DATABASE OF CURRENT SELECTED CONVERSATION
+  const fetchMessages = async () => {
+    try {
+      const messages = await databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.userChatsCollectionId,
+        [Query.equal("chatId", data.chatId)]
+      );
+
+      console.log(messages.documents[0].chats);
+      setMessages(messages.documents[0].chats);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+    fetchMessages();
+
+    return () => {
+      console.log(messages);
+    };
+  }, [data.chatId]);
 
   return (
     <div
@@ -86,11 +114,11 @@ const ChatScreen = ({ onClick }) => {
           </div>
 
           <div className="flex flex-col gap-1.5 px-5 w-full h-full mt-[96px] mb-20">
-            {Array.from({ length: 25 }).map((_, index) => (
+            {messages?.map((message, index) => (
               <ChatBubble
                 key={index}
-                isRecieved={index % 3 === 0}
-                message={`This is a message ${index}`}
+                isRecieved={message.senderId === data.user.userId}
+                message={message.text}
               />
             ))}
             <div className="h-1" ref={scrollRef} />
@@ -109,6 +137,7 @@ const ChatScreen = ({ onClick }) => {
 };
 
 const ChatBubble = ({ message, isRecieved }) => {
+  console.log(message, isRecieved);
   const recieved = "bg-zinc-800 self-start rounded-r-xl rounded-bl-xl";
   const user =
     "self-end bg-gradient-to-r from-blue-700 to-indigo-700 rounded-l-xl rounded-br-xl";

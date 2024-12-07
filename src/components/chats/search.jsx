@@ -13,12 +13,13 @@ import { Input } from "../ui/input";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { appwriteConfig, databases } from "@/lib/appwrite/config";
-import { Query } from "appwrite";
+import { ID, Query } from "appwrite";
 import Image from "next/image";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
 import { AuthsContext } from "@/context/AuthsContext";
 import { ChatsContext } from "@/context/ChatsContext";
+import { nanoid } from "nanoid";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,6 +28,7 @@ const Search = () => {
 
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [chatLoading, setChatLoading] = useState(false);
 
   const { currentUser: currentUserData, updateContext } =
     useContext(AuthsContext);
@@ -45,6 +47,7 @@ const Search = () => {
     }
   }, [searchQuery]);
 
+  /*===========[SEARCH USERS]===========*/
   const handleSearch = async (e) => {
     e.preventDefault();
 
@@ -64,17 +67,18 @@ const Search = () => {
     setLoading(false);
   };
 
+  /*===========[CLEAR SEARCH]===========*/
   const clearSearch = () => {
     setSearchQuery("");
     setUser(null);
   };
 
+  /*===========[CREATE CONVERSATIONS]===========*/
   const handleCreateChats = async (e, userData) => {
     e.preventDefault();
 
     try {
-      dispatch({ type: "CHANGE_USER", payload: userData });
-
+      setChatLoading(true);
       toast.info("Creating a new conversation");
 
       if (!currentUser?.data?.isAlumni) {
@@ -89,15 +93,30 @@ const Search = () => {
 
       const currentTime = new Date().toISOString();
 
+      // Check if the conversation already exists
+      const existingConversation = await databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.userChatsCollectionId,
+        [Query.equal("chatId", combinedId)]
+      );
+
+      if (existingConversation.documents.length > 0) {
+        toast.error("Conversation already exists");
+        throw new Error("Conversation already exists");
+      }
+
       // For the logged in user
       const updatedUserChats = [...currentUser.data.userChats];
+
+      // Generate a unique ID for the conversation
+      const conversationId = nanoid(16);
 
       updatedUserChats.push({
         userId: userData.$id,
         username: userData.username,
         imageUrl: userData.imageUrl,
         name: userData.name,
-        chatId: combinedId,
+        chatId: conversationId,
         timestamp: currentTime,
       });
 
@@ -109,41 +128,44 @@ const Search = () => {
         username: currentUser.data.username,
         imageUrl: currentUser.data.imageUrl,
         name: currentUser.data.name,
-        chatId: combinedId,
+        chatId: conversationId,
         timestamp: currentTime,
       });
 
       // Set the updated userChats array in logged in user
-      const res = await databases.updateDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.userCollectionId,
-        currentUser.$id,
-        {
-          userChats: updatedUserChats,
-        }
-      );
-
       // Set the updated userChats array in searched user
-      const res2 = await databases.updateDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.userCollectionId,
-        userData.$id,
-        {
-          userChats: updatedUserChats2,
-        }
-      );
+      // Run both updateDocument calls in parallel
+      const [res, res2] = await Promise.all([
+        databases.updateDocument(
+          appwriteConfig.databaseId,
+          appwriteConfig.userCollectionId,
+          currentUser.$id,
+          {
+            userChats: updatedUserChats,
+          }
+        ),
+        databases.updateDocument(
+          appwriteConfig.databaseId,
+          appwriteConfig.userCollectionId,
+          userData.$id,
+          {
+            userChats: updatedUserChats2,
+          }
+        ),
+      ]);
 
       // Update the context for the logged in user
       await updateContext();
+      dispatch({ type: "CHANGE_USER", payload: userData });
 
       console.log(res2);
 
       toast.success("Conversation created successfully");
     } catch (error) {
       console.log(JSON.stringify(error), error);
-      // toast.error(error);
     } finally {
       clearSearch();
+      setChatLoading(false);
       setUser(null);
     }
   };
@@ -202,7 +224,11 @@ const Search = () => {
               user.slice(0, 3).map((user) => (
                 <div
                   key={user.$id}
-                  className="flex items-center justify-between gap-5 w-full bg-zinc-900 p-3 rounded-xl mt-5"
+                  className={`flex items-center justify-between gap-5 w-full bg-zinc-900 p-3 rounded-xl mt-5  ${
+                    chatLoading
+                      ? "noselect cursor-progress border-[0] opacity-25"
+                      : ""
+                  }`}
                 >
                   <div className="flex items-center gap-3">
                     <Image
@@ -221,7 +247,7 @@ const Search = () => {
                   </div>
                   <div
                     onClick={(e) => handleCreateChats(e, user)}
-                    className="text-foreground font-semibold p-3 bg-zinc-800 border-2 border-zinc-700 hover:bg-zinc-700 transition-all rounded-xl cursor-pointer"
+                    className="font-semibold p-3 bg-zinc-800 border-2 text-foreground border-zinc-700 hover:bg-zinc-700 transition-all rounded-xl cursor-pointer"
                   >
                     Click to chat
                   </div>

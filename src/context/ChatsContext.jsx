@@ -18,10 +18,7 @@ export const ChatProvider = ({ children }) => {
       case "CHANGE_USER":
         return {
           user: action.payload,
-          chatId:
-            action.payload.$id > currentUser.$id
-              ? action.payload.$id + currentUser.$id
-              : currentUser.$id + action.payload.$id,
+          chatId: action.payload.chatId,
         };
 
       default:
