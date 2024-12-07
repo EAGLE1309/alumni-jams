@@ -1,9 +1,16 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import Link from "next/link";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -29,18 +36,24 @@ export default function Contact() {
   };
 
   return (
-    <Card className="w-full min-h-[700px] mx-auto p-8 dark:bg-zinc-900">
+    <Card className="w-full md:w-[525px] mx-auto p-8 dark:bg-zinc-900">
       <CardHeader className="px-0 pt-0">
-        <CardTitle className="text-3xl font-bold dark:text-white">Contact Us</CardTitle>
+        <CardTitle className="text-3xl font-bold dark:text-white">
+          Contact Us
+        </CardTitle>
         <CardDescription className="text-gray-500 dark:text-gray-300 mt-2 text-lg">
-          We&apos;d love to hear from you! Please reach out with any questions or feedback.
+          We&apos;d love to hear from you! Please reach out with any questions
+          or feedback.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8 mt-6 px-0">
         <section>
-          <h2 className="text-2xl font-bold text-blue-400 dark:text-blue-300 mb-4">Get in Touch</h2>
+          <h2 className="text-2xl font-bold text-blue-500 mb-5">
+            Get in Touch
+          </h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-            Whether you have questions about our platform, need support, or just want to say hello, we&apos;re here to help!
+            Whether you have questions about our platform, need support, or just
+            want to say hello, we&apos;re here to help!
           </p>
         </section>
 
@@ -85,15 +98,9 @@ export default function Contact() {
           </div>
         </form>
       </CardContent>
-      <div className="mt-4 space-y-2">
-        <Button
-          onClick={() => window.location.href = "/"}
-          className="w-full"
-          size="lg"
-        >
-          Go Back to Home
-        </Button>
-      </div>
+      <Button className="w-full" size="lg" asChild>
+        <Link href="/">Go Back to Home</Link>
+      </Button>
     </Card>
   );
 }

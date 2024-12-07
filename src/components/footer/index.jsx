@@ -28,9 +28,12 @@ const data = [
 const Footer = () => {
   return (
     <>
-      <footer className="w-full h-auto overflow-x-hidden bg-[#181A1C] px-4 py-16">
+      <footer
+        className="w-full h-auto overflow-x-hidden bg-zinc-100 border-t-[1px]
+      dark:border-zinc-700 border-zinc-300 dark:bg-[#121314] px-4 py-16"
+      >
         <CTABox />
-        <div className="h-auto w-full text-gray-100 lg:mx-auto max-w-screen-xl flex flex-col md:flex-row gap-4 justify-between items-start">
+        <div className="h-auto w-full dark:text-gray-100 lg:mx-auto max-w-screen-xl flex flex-col md:flex-row gap-4 justify-between items-start">
           <div className="flex flex-col gap-8 lg:gap-0 items-start text-left">
             <h1 className="text-4xl font-heading font-semibold leading-0 mt-[-0.45rem]">
               Alumni Jams

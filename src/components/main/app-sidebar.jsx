@@ -54,7 +54,7 @@ const items = [
   },
   {
     title: "Profile",
-    url: "#",
+    url: "/profile",
     icon: User,
   },
   {
@@ -113,14 +113,14 @@ export function AppSidebar({ data, handleSignOut }) {
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col items-start gap-3 noselect">
             {data?.data?.isAlumni ? (
-              <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
+              <div className="py-0.5 px-3 bg-zinc-100 dark:bg-zinc-800 rounded-full border-[1.5px] border-zinc-300 dark:border-2 dark:border-zinc-700 ">
                 <p className="flex gap-1 text-sm rounded-full">
                   Alumni
                   <ShieldCheck className="size-5 text-green-500" />
                 </p>
               </div>
             ) : (
-              <div className="py-0.5 px-3 bg-zinc-800 rounded-full border-2 border-zinc-700 ">
+              <div className="py-0.5 px-3 dark:bg-zinc-800 rounded-full border border-zinc-300 dark:border-2 dark:border-zinc-700 ">
                 <p className="flex gap-1 text-sm rounded-full">
                   Student
                   <ShieldCheck className="size-5 text-blue-500" />

@@ -1,7 +1,7 @@
 import React from "react";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import MaxWidthWrapper from "../layout/MaxWidthWrapper";
+import Link from "next/link";
 
 const CTABox = () => {
   return (
@@ -17,8 +17,9 @@ const CTABox = () => {
             className="py-6 text-md font-bold"
             size="lg"
             variant="secondary"
+            asChild
           >
-            Explore Now
+            <Link href="/register">Explore Now</Link>
           </Button>
         </div>
       </div>

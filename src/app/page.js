@@ -54,7 +54,7 @@ export default function Home() {
           </div>
         </MaxWidthWrapper>
       </section>
-      <section>
+      <section className="dark:bg-[#181A1C]">
         <MaxWidthWrapper className="py-28 flex flex-col gap-12">
           <div className="flex flex-col w-full">
             <h1 className="font-heading text-3xl font-semibold underline decoration-primary decoration-[7px] underline-offset-[12px]">
