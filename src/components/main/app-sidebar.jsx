@@ -15,6 +15,7 @@ import {
   User,
   GraduationCap,
   ShieldCheck,
+  Search,
 } from "lucide-react";
 
 import {
@@ -42,8 +43,10 @@ import {
 import { useTheme } from "next-themes";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
+import { Input } from "../ui/input";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -52,6 +55,11 @@ const items = [
     url: "/home",
     icon: Home,
   },
+  // {
+  //   title: "Search",
+  //   url: "/search",
+  //   icon: Search,
+  // },
   {
     title: "Profile",
     url: "/profile",
@@ -81,6 +89,7 @@ const items = [
 
 export function AppSidebar({ data, handleSignOut }) {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
 
   return (
     <Sidebar>
@@ -95,6 +104,21 @@ export function AppSidebar({ data, handleSignOut }) {
           <SidebarGroupLabel>Alumni Jams</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              <div className="inline-flex w-full pl-1 pr-5">
+                <div className="py-1 px-3 flex rounded-l-lg items-center bg-zinc-800 justify-center">
+                  <Search className="w-4 h-4" />
+                </div>
+                <Input
+                  placeholder="Search"
+                  onKeyPress={(e) => {
+                    if (e.keyCode == 13) {
+                      router.push(`/search`);
+                    }
+                  }}
+                  className="rounded-l-none rounded-r-lg"
+                  required
+                />
+              </div>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>

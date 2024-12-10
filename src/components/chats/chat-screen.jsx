@@ -92,12 +92,12 @@ const ChatScreen = ({ onClick }) => {
       ) : (
         <>
           <div
-            className="self-start w-full fixed top-0 py-3 overflow-y-hidden inline-flex gap-5 items-center justify-between bg-zinc-800 px-5"
+            className="self-start w-full fixed top-0 py-3 overflow-y-hidden inline-flex gap-5 items-center justify-between bg-zinc-200 dark:bg-zinc-800 px-5"
             style={{ width: `${width}px` }}
           >
             <div className="inline-flex items-center gap-5">
               <Image
-                className="rounded-full"
+                className="rounded-full bg-white"
                 src={data?.user?.imageUrl}
                 alt="Chats"
                 width={45}
@@ -106,7 +106,7 @@ const ChatScreen = ({ onClick }) => {
               <h2 className="text-lg font-semibold">{data?.user?.name}</h2>
             </div>
             <div
-              className="p-2 cursor-pointer bg-zinc-700 hover:bg-zinc-600 transition-all rounded-full inline-flex items-center justify-center"
+              className="p-2 cursor-pointer bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-600 transition-all rounded-full inline-flex items-center justify-center"
               onClick={() => handleClose()}
             >
               <ArrowLeft />
@@ -138,9 +138,10 @@ const ChatScreen = ({ onClick }) => {
 
 const ChatBubble = ({ message, isRecieved }) => {
   console.log(message, isRecieved);
-  const recieved = "bg-zinc-800 self-start rounded-r-xl rounded-bl-xl";
+  const recieved =
+    "bg-zinc-200 text-semibold dark:bg-zinc-800 self-start rounded-r-xl rounded-bl-xl";
   const user =
-    "self-end bg-gradient-to-r from-blue-700 to-indigo-700 rounded-l-xl rounded-br-xl";
+    "self-end text-white bg-gradient-to-r from-blue-700 to-indigo-700 rounded-l-xl rounded-br-xl";
 
   return (
     <div className={cn(isRecieved ? recieved : user, "p-3")}>{message}</div>
