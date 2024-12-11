@@ -33,6 +33,7 @@ export default function GettingStarted() {
     }
   });
 
+  const [loading, setLoading] = useState(false);
   const [university, setUniversity] = useState("");
   const [college, setCollege] = useState("");
   const [graduationYear, setGraduationYear] = useState(null);
@@ -61,7 +62,7 @@ export default function GettingStarted() {
     /*=====[ NEW USER CREATION ]=====*/
     try {
       // Input Validation
-      if (!email || !password || !name || !username) {
+      if (!email || !password || !username) {
         throw new Error("All fields are required.");
       }
 
@@ -69,7 +70,7 @@ export default function GettingStarted() {
         throw new Error("Password must be at least 8 characters.");
       }
 
-      await register(email, password, name, username);
+      await register(email, password, username);
 
       /*=====[ Set loading to false & navigate to home ]=====*/
       setLoading(false);
@@ -93,140 +94,148 @@ export default function GettingStarted() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5 px-0 pb-0 h-auto">
-        <form className="w-full flex gap-5 space-y-1.5">
-          <div>
-            <div className="space-y-1">
-              <Label htmlFor="univesity">
-                University<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={university}
-                onChange={(e) => setUniversity(e.target.value)}
-                placeholder="Name of your university"
-                type="text"
-                required
-              />
-            </div>
+        <form className="w-full flex flex-col gap-5 space-y-1.5">
+          <div className="grid grid-cols-2 gap-5">
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <Label htmlFor="univesity">
+                  University<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={university}
+                  onChange={(e) => setUniversity(e.target.value)}
+                  placeholder="Name of your university"
+                  type="text"
+                  required
+                />
+              </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="univesity">
-                College<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={college}
-                onChange={(e) => setCollege(e.target.value)}
-                placeholder="Name of your college"
-                type="text"
-                required
-              />
-            </div>
+              <div className="space-y-1">
+                <Label htmlFor="univesity">
+                  College<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={college}
+                  onChange={(e) => setCollege(e.target.value)}
+                  placeholder="Name of your college"
+                  type="text"
+                  required
+                />
+              </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="graduationYear">
-                Graduation Year<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={graduationYear}
-                onChange={(e) => setGraduationYear(e.target.value)}
-                placeholder="2024"
-                type="number"
-                required
-              />
-            </div>
+              <div className="space-y-1">
+                <Label htmlFor="graduationYear">
+                  Graduation Year<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={graduationYear}
+                  onChange={(e) => setGraduationYear(e.target.value)}
+                  placeholder="2024"
+                  type="number"
+                  required
+                />
+              </div>
 
-            <div className="space-y-1">
-              <Label htmlFor="companyName">
-                Company Name<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
-                placeholder="Name of your company"
-                type="text"
-                required
-              />
+              <div className="space-y-1">
+                <Label htmlFor="companyName">
+                  Company Name<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="Name of your company"
+                  type="text"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="companyPos">
+                  Company Position<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={companyPos}
+                  onChange={(e) => setCompanyPos(e.target.value)}
+                  placeholder="Your position in the company"
+                  type="text"
+                  required
+                />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <Label htmlFor="employmentType">
+                  Employment Type<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={employmentType}
+                  onChange={(e) => setEmploymentType(e.target.value)}
+                  placeholder="Part-time, Full-time, Intern, etc."
+                  type="text"
+                  required
+                />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="companyLocation">
+                  Company Location<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={companyLocation}
+                  onChange={(e) => setCompanyLocation(e.target.value)}
+                  placeholder="City, State, Country"
+                  type="text"
+                  required
+                />
+              </div>
+              <div className="space-y-1 pb-4">
+                <Label htmlFor="companyStartDate">
+                  Company Start Date<span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  disabled={loading}
+                  value={companyStartDate}
+                  onChange={(e) => setCompanyStartDate(e.target.value)}
+                  placeholder="YYYY-MM-DD"
+                  type="date"
+                  required
+                />
+              </div>
+              <div className="[background:linear-gradient(45deg,theme(colors.zinc.900),theme(colors.zinc.800)_50%,theme(colors.zinc.900))_padding-box,conic-gradient(from_var(--border-angle),theme(colors.zinc.600/.48)_80%,_theme(colors.zinc.500)_86%,_theme(colors.zinc.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.blue.600/.48))_border-box] rounded-xl border border-transparent animate-border">
+                {" "}
+                <div
+                  className={`relative flex flex-row items-start space-x-3 space-y-0 rounded-xl border p-4 ${
+                    loading ? "opacity-50 cursor-not-allowed" : "opcaity-100"
+                  }`}
+                >
+                  <Checkbox
+                    checked={isCurrentlyWorking}
+                    onCheckedChange={(e) => setIsCurrentlyWorking(e)}
+                    required
+                  />
+                  <div className="space-y-1 leading-none">
+                    <Label>Are you currently working in this company?</Label>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="companyEndDate">Company End Date</Label>
+                <Input
+                  disabled={loading || isCurrentlyWorking}
+                  value={companyEndDate}
+                  onChange={(e) => setCompanyEndDate(e.target.value)}
+                  placeholder="YYYY-MM-DD"
+                  type="date"
+                />
+              </div>
             </div>
           </div>
-          <div>
-            <div className="space-y-1">
-              <Label htmlFor="companyPos">
-                Company Position<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={companyPos}
-                onChange={(e) => setCompanyPos(e.target.value)}
-                placeholder="Your position in the company"
-                type="text"
-                required
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="employmentType">
-                Employment Type<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={employmentType}
-                onChange={(e) => setEmploymentType(e.target.value)}
-                placeholder="Part-time, Full-time, Intern, etc."
-                type="text"
-                required
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="companyLocation">
-                Company Location<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={companyLocation}
-                onChange={(e) => setCompanyLocation(e.target.value)}
-                placeholder="City, State, Country"
-                type="text"
-                required
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="companyStartDate">
-                Company Start Date<span className="text-red-500">*</span>
-              </Label>
-              <Input
-                disabled={loading}
-                value={companyStartDate}
-                onChange={(e) => setCompanyStartDate(e.target.value)}
-                placeholder="YYYY-MM-DD"
-                type="date"
-                required
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="isCurrentlyWorking">
-                Are you currently working in the company?
-                <span className="text-red-500">*</span>
-              </Label>
-              <Checkbox
-                disabled={loading}
-                checked={isCurrentlyWorking}
-                onChange={(e) => setIsCurrentlyWorking(e.target.checked)}
-                className="mt-2"
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="companyEndDate">Company End Date</Label>
-              <Input
-                disabled={loading || !isCurrentlyWorking}
-                value={companyEndDate}
-                onChange={(e) => setCompanyEndDate(e.target.value)}
-                placeholder="YYYY-MM-DD"
-                type="date"
-              />
-            </div>
-          </div>
+
           <Button
             onClick={(e) => handleSubmit(e)}
             className="w-full"

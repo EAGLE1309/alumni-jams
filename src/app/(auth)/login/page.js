@@ -67,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <Card className="w-full h-full p-8 dark:bg-zinc-900">
+    <Card className="w-full h-full p-8 md:w-[420px] dark:bg-zinc-900">
       <CardHeader className="px-0 pt-0">
         <CardTitle>Sign up to continue</CardTitle>
         <CardDescription>

@@ -86,7 +86,7 @@ export default function SignUpCard() {
   };
 
   return (
-    <Card className="relative w-full h-full p-8 dark:bg-zinc-900">
+    <Card className="relative w-full h-full p-8 md:w-[420px] dark:bg-zinc-900">
       <CardHeader className="px-0 pt-0">
         <CardTitle>Sign up to continue</CardTitle>
         <CardDescription>

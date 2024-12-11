@@ -36,6 +36,7 @@ const source_serif = Source_Serif_4({
 export const metadata = {
   title: "Alumni Jams",
   description: "Testing alpha v1.1",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }) {
