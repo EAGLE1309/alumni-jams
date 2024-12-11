@@ -14,7 +14,7 @@ export default function Home() {
           Reunite with your <br /> Batchmates
         </h1>
         <p className="text-white text-center text-md md:text-lg font-normal mt-8 max-w-[500px]">
-          Welcome to the official Sinhgad Alumni Network, where past meets the
+          Welcome to the official (College Name) Alumni Network, where past meets the
           present and future. Our vibrant community of graduates is spread
           across the globe, excelling in diverse fields.
         </p>

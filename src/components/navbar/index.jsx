@@ -45,7 +45,7 @@ const Navbar = ({ hasWhiteBgs }) => {
               } bg-transparent`}
               variant={"secondary"}
             >
-              <Link href="/community">Events</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
             <Button className="text-white" asChild>
               <Link href="/login">Login</Link>
