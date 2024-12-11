@@ -105,7 +105,7 @@ export function AppSidebar({ data, handleSignOut }) {
           <SidebarGroupContent>
             <SidebarMenu>
               <div className="inline-flex w-full pl-1 pr-5">
-                <div className="py-1 px-3 flex rounded-l-lg items-center bg-zinc-800 justify-center">
+                <div className="py-1 px-3 flex rounded-l-lg items-center dark:bg-zinc-800 justify-center">
                   <Search className="w-4 h-4" />
                 </div>
                 <Input
