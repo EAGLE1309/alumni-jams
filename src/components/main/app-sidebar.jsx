@@ -16,6 +16,7 @@ import {
   GraduationCap,
   ShieldCheck,
   Search,
+  CircleDollarSign,
 } from "lucide-react";
 
 import {
@@ -84,6 +85,11 @@ const items = [
     title: "Student Corner",
     url: "/student-corner",
     icon: GraduationCap,
+  },
+  {
+    title: "Donation Portal",
+    url: "/donation",
+    icon: CircleDollarSign,
   },
 ];
 

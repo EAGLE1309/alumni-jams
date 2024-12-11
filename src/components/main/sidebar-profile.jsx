@@ -33,7 +33,7 @@ const SideBarProfile = ({ user }) => {
         </p>
         <Separator className="w-[75%] my-2 bg-zinc-800" />
         <Button className="w-full">Profile</Button>
-        <Button className="w-full bg-white/5 font-semibold hover:bg-white/15">
+        <Button className="w-full dark:bg-white/5 bg-black/15 dark:text-white text-dark font-semibold hover:bg-white/15">
           Chats
         </Button>
       </div>
