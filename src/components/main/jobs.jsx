@@ -59,12 +59,12 @@ const Card = () => {
             Nvidia
           </h5>
           <h3 className="line-clamp-2 md:mb-0 mb-5 text-lg font-bold leading-5 md:leading-normal">
-            Need a CEO at Nvidia & Google
+            Senior Software Engineer
           </h3>
         </div>
         <div className="overflow-none relative flex w-full flex-wrap items-baseline gap-3">
           <span className="px-3 py-1 bg-black/5 text-zinc-500 dark:bg-white/5 rounded-lg whitespace-nowrap text-xs uppercase font-semibold dark:text-zinc-400 md:text-sm">
-            ceo
+            SDE
           </span>
           <span className="px-3 py-1 bg-black/5 text-zinc-500 dark:bg-white/5 rounded-lg whitespace-nowrap text-xs uppercase font-semibold dark:text-zinc-400 md:text-sm">
             Senior
