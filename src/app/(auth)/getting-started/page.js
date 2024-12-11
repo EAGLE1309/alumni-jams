@@ -33,10 +33,6 @@ export default function GettingStarted() {
     }
   });
 
-  const [name, setName] = useState("");
-  const [username, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [university, setUniversity] = useState("");
   const [college, setCollege] = useState("");
   const [graduationYear, setGraduationYear] = useState(null);
@@ -52,9 +48,6 @@ export default function GettingStarted() {
   const errNotification = (err) => toast.error(err);
   const infoNotification = (info) => toast.info(info);
 
-  /*=====[USESTATE HOOKS & UTILITIES]=====*/
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const changeEyeIcon = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
@@ -100,7 +93,7 @@ export default function GettingStarted() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5 px-0 pb-0 h-auto">
-        <form className="space-y-1.5">
+        <form className="w-full flex gap-5 space-y-1.5">
           <div>
             <div className="space-y-1">
               <Label htmlFor="univesity">
