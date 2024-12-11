@@ -32,7 +32,7 @@ export default function SignUpCard() {
 
   useEffect(() => {
     if (currentUser && !isLoading) {
-      router.replace("/home");
+      router.replace("/getting-started");
     }
   });
 

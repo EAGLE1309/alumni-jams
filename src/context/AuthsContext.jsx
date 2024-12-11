@@ -152,6 +152,18 @@ export const AuthsProvider = ({ children }) => {
           username,
           isAlumni,
           imageUrl: avatarUrl,
+          isVerified: false,
+          university: "",
+          college: "",
+          graduationYear: 0,
+          companyName: "",
+          companyPos: "",
+          employmentType: "",
+          companyLocation: "",
+          companyStartDate: "",
+          isCurrentlyWorking: false,
+          companyEndDate: "",
+          stream: "",
         }
       );
 

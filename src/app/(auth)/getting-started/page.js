@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { appwriteConfig, databases } from "@/lib/appwrite/config";
 
 export default function GettingStarted() {
   const router = useRouter();
@@ -27,16 +28,12 @@ export default function GettingStarted() {
     register,
   } = useContext(AuthsContext);
 
-  useEffect(() => {
-    if (currentUser && !isLoading) {
-      router.replace("/home");
-    }
-  });
+  console.log(currentUser);
 
   const [loading, setLoading] = useState(false);
   const [university, setUniversity] = useState("");
   const [college, setCollege] = useState("");
-  const [graduationYear, setGraduationYear] = useState(null);
+  const [graduationYear, setGraduationYear] = useState(0);
   const [companyName, setCompanyName] = useState("");
   const [companyPos, setCompanyPos] = useState("");
   const [employmentType, setEmploymentType] = useState("");
@@ -49,11 +46,6 @@ export default function GettingStarted() {
   const errNotification = (err) => toast.error(err);
   const infoNotification = (info) => toast.info(info);
 
-  const changeEyeIcon = (e) => {
-    e.preventDefault();
-    setShowPassword(!showPassword);
-  };
-
   /*=====[AUTHENTICATION SYSTEM]=====*/
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -62,15 +54,35 @@ export default function GettingStarted() {
     /*=====[ NEW USER CREATION ]=====*/
     try {
       // Input Validation
-      if (!email || !password || !username) {
+      if (!university || !college || !graduationYear) {
         throw new Error("All fields are required.");
       }
 
-      if (password.length < 8) {
-        throw new Error("Password must be at least 8 characters.");
+      if (
+        isNaN(graduationYear) ||
+        graduationYear < 1900 ||
+        graduationYear > new Date().getFullYear()
+      ) {
+        throw new Error("Please enter a valid graduation year.");
       }
 
-      await register(email, password, username);
+      const updatedUser = await databases.updateDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.userCollectionId,
+        currentUser.$id,
+        {
+          university,
+          college,
+          graduationYear,
+          companyName,
+          companyPos,
+          employmentType,
+          companyLocation,
+          companyStartDate,
+          isCurrentlyWorking,
+          companyEndDate,
+        }
+      );
 
       /*=====[ Set loading to false & navigate to home ]=====*/
       setLoading(false);
@@ -132,7 +144,7 @@ export default function GettingStarted() {
                 <Input
                   disabled={loading}
                   value={graduationYear}
-                  onChange={(e) => setGraduationYear(e.target.value)}
+                  onChange={(e) => setGraduationYear(parseInt(e.target.value))}
                   placeholder="2024"
                   type="number"
                   required
