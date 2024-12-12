@@ -42,12 +42,14 @@ const Jobs = () => {
         </div>
       </div>
       <div className="flex flex-col gap-5">
-        <Link
-          href="/jobs/create"
-          className="flex items-center justify-center bg-zinc-800 border-dashed border-[2.5px] border-zinc-700 rounded-xl font-bold text-zinc-300 hover:bg-zinc-900 transition-all h-16 cursor-pointer "
-        >
-          Create new jobs
-        </Link>
+        {currentUser?.data?.isAlumni && (
+          <Link
+            href="/jobs/create"
+            className="flex items-center justify-center bg-zinc-800 border-dashed border-[2.5px] border-zinc-700 rounded-xl font-bold text-zinc-300 hover:bg-zinc-900 transition-all h-16 cursor-pointer "
+          >
+            Create new jobs
+          </Link>
+        )}
         <SideBarProfile user={currentUser} />
       </div>
     </section>
