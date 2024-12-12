@@ -79,11 +79,6 @@ export function AppSidebar({ data, handleSignOut }) {
           url: "https://alumini-sanity.vercel.app",
           icon: Contact,
         },
-        {
-          title: "Events",
-          url: "/events",
-          icon: CalendarCheck2,
-        },
       ]
     : [
         {

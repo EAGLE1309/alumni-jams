@@ -8,6 +8,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { AuthsContext } from "@/context/AuthsContext";
+import ChatbotEmbed from "@/components/main/chatbot-embed";
 
 const Layout = ({ children }) => {
   const router = useRouter();
@@ -37,6 +38,7 @@ const Layout = ({ children }) => {
       <main className="bg-zinc-100 dark:bg-[#0D0D0D] w-full">
         <SidebarCustomTrigger />
         {children}
+        <ChatbotEmbed />
       </main>
     </SidebarProvider>
   );
