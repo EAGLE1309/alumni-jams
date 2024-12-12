@@ -155,7 +155,7 @@ export const AuthsProvider = ({ children }) => {
           isVerified: false,
           university: "",
           college: "",
-          graduationYear: 0,
+          graduationYear: "2024",
           companyName: "",
           companyPos: "",
           employmentType: "",

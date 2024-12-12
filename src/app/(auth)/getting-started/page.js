@@ -73,7 +73,7 @@ export default function GettingStarted() {
         {
           university,
           college,
-          graduationYear,
+          graduationYear: "2021",
           companyName,
           companyPos,
           employmentType,
