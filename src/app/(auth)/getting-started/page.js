@@ -147,7 +147,7 @@ export default function GettingStarted() {
                 />
               </div>
 
-              {!currentUser?.data?.isAlumni && (
+              {currentUser?.data?.isAlumni && (
                 <>
                   <div className="space-y-1">
                     <Label htmlFor="companyName">
@@ -180,7 +180,7 @@ export default function GettingStarted() {
             </div>
 
             <div className="space-y-3">
-              {!currentUser?.data?.isAlumni && (
+              {currentUser?.data?.isAlumni && (
                 <>
                   <div className="space-y-1">
                     <Label htmlFor="employmentType">
