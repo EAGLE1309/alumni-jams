@@ -58,11 +58,7 @@ export default function GettingStarted() {
         throw new Error("All fields are required.");
       }
 
-      if (
-        isNaN(graduationYear) ||
-        graduationYear < 1900 ||
-        graduationYear > new Date().getFullYear()
-      ) {
+      if (isNaN(graduationYear) || graduationYear < 1900) {
         throw new Error("Please enter a valid graduation year.");
       }
 
@@ -73,7 +69,7 @@ export default function GettingStarted() {
         {
           university,
           college,
-          graduationYear: "2021",
+          graduationYear: graduationYear.toString(),
           companyName,
           companyPos,
           employmentType,
@@ -107,7 +103,9 @@ export default function GettingStarted() {
       </CardHeader>
       <CardContent className="space-y-5 px-0 pb-0 h-auto">
         <form className="w-full flex flex-col gap-5 space-y-1.5">
-          <div className="grid grid-cols-2 gap-5">
+          <div
+            className={`${currentUser?.data?.isAlumni ? "grid grid-cols-2 gap-5" : "grid grid-cols-1 gap-5"}`}
+          >
             <div className="space-y-3">
               <div className="space-y-1">
                 <Label htmlFor="univesity">
@@ -144,108 +142,115 @@ export default function GettingStarted() {
                 <Input
                   disabled={loading}
                   value={graduationYear}
-                  onChange={(e) => setGraduationYear(parseInt(e.target.value))}
+                  onChange={(e) => setGraduationYear(e.target.value)}
                   placeholder="2024"
                   type="number"
                   required
                 />
               </div>
 
-              <div className="space-y-1">
-                <Label htmlFor="companyName">
-                  Company Name<span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  disabled={loading}
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  placeholder="Name of your company"
-                  type="text"
-                  required
-                />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="companyPos">
-                  Company Position<span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  disabled={loading}
-                  value={companyPos}
-                  onChange={(e) => setCompanyPos(e.target.value)}
-                  placeholder="Your position in the company"
-                  type="text"
-                  required
-                />
-              </div>
+              {currentUser?.data?.isAlumni && (
+                <>
+                  <div className="space-y-1">
+                    <Label htmlFor="companyName">
+                      Company Name<span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      disabled={loading}
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      placeholder="Name of your company"
+                      type="text"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="companyPos">
+                      Company Position<span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      disabled={loading}
+                      value={companyPos}
+                      onChange={(e) => setCompanyPos(e.target.value)}
+                      placeholder="Your position in the company"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </>
+              )}
             </div>
-            <div className="space-y-3">
-              <div className="space-y-1">
-                <Label htmlFor="employmentType">
-                  Employment Type<span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  disabled={loading}
-                  value={employmentType}
-                  onChange={(e) => setEmploymentType(e.target.value)}
-                  placeholder="Part-time, Full-time, Intern, etc."
-                  type="text"
-                  required
-                />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="companyLocation">
-                  Company Location<span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  disabled={loading}
-                  value={companyLocation}
-                  onChange={(e) => setCompanyLocation(e.target.value)}
-                  placeholder="City, State, Country"
-                  type="text"
-                  required
-                />
-              </div>
-              <div className="space-y-1 pb-4">
-                <Label htmlFor="companyStartDate">
-                  Company Start Date<span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  disabled={loading}
-                  value={companyStartDate}
-                  onChange={(e) => setCompanyStartDate(e.target.value)}
-                  placeholder="YYYY-MM-DD"
-                  type="date"
-                  required
-                />
-              </div>
-              <div className="[background:linear-gradient(45deg,theme(colors.zinc.900),theme(colors.zinc.800)_50%,theme(colors.zinc.900))_padding-box,conic-gradient(from_var(--border-angle),theme(colors.zinc.600/.48)_80%,_theme(colors.zinc.500)_86%,_theme(colors.zinc.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.blue.600/.48))_border-box] rounded-xl border border-transparent animate-border">
-                {" "}
-                <div
-                  className={`relative flex flex-row items-start space-x-3 space-y-0 rounded-xl border p-4 ${
-                    loading ? "opacity-50 cursor-not-allowed" : "opcaity-100"
-                  }`}
-                >
-                  <Checkbox
-                    checked={isCurrentlyWorking}
-                    onCheckedChange={(e) => setIsCurrentlyWorking(e)}
+
+            {currentUser?.data?.data?.isAlumni && (
+              <div className="space-y-3">
+                <div className="space-y-1">
+                  <Label htmlFor="employmentType">
+                    Employment Type<span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    disabled={loading}
+                    value={employmentType}
+                    onChange={(e) => setEmploymentType(e.target.value)}
+                    placeholder="Part-time, Full-time, Intern, etc."
+                    type="text"
                     required
                   />
-                  <div className="space-y-1 leading-none">
-                    <Label>Are you currently working in this company?</Label>
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="companyLocation">
+                    Company Location<span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    disabled={loading}
+                    value={companyLocation}
+                    onChange={(e) => setCompanyLocation(e.target.value)}
+                    placeholder="City, State, Country"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div className="space-y-1 pb-4">
+                  <Label htmlFor="companyStartDate">
+                    Company Start Date<span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    disabled={loading}
+                    value={companyStartDate}
+                    onChange={(e) => setCompanyStartDate(e.target.value)}
+                    placeholder="YYYY-MM-DD"
+                    type="date"
+                    required
+                  />
+                </div>
+                <div className="[background:linear-gradient(45deg,theme(colors.zinc.900),theme(colors.zinc.800)_50%,theme(colors.zinc.900))_padding-box,conic-gradient(from_var(--border-angle),theme(colors.zinc.600/.48)_80%,_theme(colors.zinc.500)_86%,_theme(colors.zinc.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.blue.600/.48))_border-box] rounded-xl border border-transparent animate-border">
+                  {" "}
+                  <div
+                    className={`relative flex flex-row items-start space-x-3 space-y-0 rounded-xl border p-4 ${
+                      loading ? "opacity-50 cursor-not-allowed" : "opcaity-100"
+                    }`}
+                  >
+                    <Checkbox
+                      checked={isCurrentlyWorking}
+                      onCheckedChange={(e) => setIsCurrentlyWorking(e)}
+                      required
+                    />
+                    <div className="space-y-1 leading-none">
+                      <Label>Are you currently working in this company?</Label>
+                    </div>
                   </div>
                 </div>
+                <div className="space-y-1">
+                  <Label htmlFor="companyEndDate">Company End Date</Label>
+                  <Input
+                    disabled={loading || isCurrentlyWorking}
+                    value={companyEndDate}
+                    onChange={(e) => setCompanyEndDate(e.target.value)}
+                    placeholder="YYYY-MM-DD"
+                    type="date"
+                  />
+                </div>
               </div>
-              <div className="space-y-1">
-                <Label htmlFor="companyEndDate">Company End Date</Label>
-                <Input
-                  disabled={loading || isCurrentlyWorking}
-                  value={companyEndDate}
-                  onChange={(e) => setCompanyEndDate(e.target.value)}
-                  placeholder="YYYY-MM-DD"
-                  type="date"
-                />
-              </div>
-            </div>
+            )}
           </div>
 
           <Button

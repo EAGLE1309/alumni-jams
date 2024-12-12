@@ -20,6 +20,8 @@ const SideBarProfile = ({ user }) => {
             <h1 className="text-2xl font-bold">{user?.data?.name}</h1>
             {user?.data?.isAlumni ? (
               <ShieldCheck className="size-5 text-green-500" />
+            ) : user?.data?.isAdmin ? (
+              <ShieldCheck className="size-5 text-pink-500" />
             ) : (
               <ShieldCheck className="size-5 text-blue-500" />
             )}

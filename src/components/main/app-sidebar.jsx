@@ -17,6 +17,9 @@ import {
   ShieldCheck,
   Search,
   CircleDollarSign,
+  Contact,
+  MessageCircleReply,
+  CalendarCheck2,
 } from "lucide-react";
 
 import {
@@ -49,53 +52,76 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/home",
-    icon: Home,
-  },
-  {
-    title: "Directory",
-    url: "/directory",
-    icon: Search,
-  },
-  {
-    title: "Profile",
-    url: "/profile",
-    icon: User,
-  },
-  {
-    title: "Job Postings",
-    url: "/jobs",
-    icon: Briefcase,
-  },
-  {
-    title: "Chats",
-    url: "/chats",
-    icon: MessageSquareText,
-  },
-  {
-    title: "Community & News",
-    url: "/community",
-    icon: Sparkle,
-  },
-  {
-    title: "Student Corner",
-    url: "/student-corner",
-    icon: GraduationCap,
-  },
-  {
-    title: "Donation Portal",
-    url: "/donation",
-    icon: CircleDollarSign,
-  },
-];
-
 export function AppSidebar({ data, handleSignOut }) {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
+
+  // Menu items.
+  const items = data?.data?.isAdmin
+    ? [
+        {
+          title: "Home",
+          url: "/home",
+          icon: Home,
+        },
+        {
+          title: "Profile",
+          url: "/profile",
+          icon: User,
+        },
+        {
+          title: "Directory",
+          url: "/directory",
+          icon: Search,
+        },
+        {
+          title: "Content",
+          url: "https://alumini-sanity.vercel.app",
+          icon: Contact,
+        },
+        {
+          title: "Events",
+          url: "/events",
+          icon: CalendarCheck2,
+        },
+      ]
+    : [
+        {
+          title: "Home",
+          url: "/home",
+          icon: Home,
+        },
+        {
+          title: "Profile",
+          url: "/profile",
+          icon: User,
+        },
+        {
+          title: "Job Postings",
+          url: "/jobs",
+          icon: Briefcase,
+        },
+        {
+          title: "Chats",
+          url: "/chats",
+          icon: MessageSquareText,
+        },
+        {
+          title: "Community & News",
+          url: "/community",
+          icon: Sparkle,
+        },
+        {
+          title: "Student Corner",
+          url: "/student-corner",
+          icon: GraduationCap,
+        },
+        {
+          title: "Donation Portal",
+          url: "/donation",
+          icon: CircleDollarSign,
+        },
+      ];
 
   return (
     <Sidebar>
@@ -110,21 +136,6 @@ export function AppSidebar({ data, handleSignOut }) {
           <SidebarGroupLabel>Alumni Jams</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <div className="inline-flex w-full pl-1 pr-5">
-                <div className="py-1 px-3 flex rounded-l-lg items-center dark:bg-zinc-800 justify-center">
-                  <Search className="w-4 h-4" />
-                </div>
-                <Input
-                  placeholder="Search"
-                  onKeyPress={(e) => {
-                    if (e.keyCode == 13) {
-                      router.push(`/search`);
-                    }
-                  }}
-                  className="rounded-l-none rounded-r-lg"
-                  required
-                />
-              </div>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -147,6 +158,13 @@ export function AppSidebar({ data, handleSignOut }) {
                 <p className="flex gap-1 text-sm rounded-full">
                   Alumni
                   <ShieldCheck className="size-5 text-green-500" />
+                </p>
+              </div>
+            ) : data?.data?.isAdmin ? (
+              <div className="py-0.5 px-3 dark:bg-zinc-800 rounded-full border border-zinc-300 dark:border-2 dark:border-zinc-700 ">
+                <p className="flex gap-1 text-sm rounded-full">
+                  Admin
+                  <ShieldCheck className="size-5 text-pink-500" />
                 </p>
               </div>
             ) : (

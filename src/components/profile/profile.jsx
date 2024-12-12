@@ -58,150 +58,171 @@ const Profile = () => {
             <Edit className="text-white" />
           </div>
         </div>
-        <div className="w-full flex flex-col p-5 border border-zinc-700 rounded-xl">
-          <h1 className="text-xl font-bold mb-5">Work Information</h1>
-          <div className="grid grid-cols-2 gap-7">
-            <Field
-              title="College"
-              description={currentUser?.data?.college}
-              editMode={editMode}
-              value={profile?.college}
-              onChange={(e) =>
-                setProfile((prev) => ({ ...prev, college: e.target.value }))
-              }
-            />
-            <Field
-              title="University"
-              description={currentUser?.data?.university}
-              editMode={editMode}
-              value={profile?.university}
-              onChange={(e) =>
-                setProfile((prev) => ({ ...prev, university: e.target.value }))
-              }
-            />
-            <Field
-              title="Graduation Year"
-              description={currentUser?.data?.graduationYear}
-              editMode={editMode}
-              value={profile?.graduationYear}
-              onChange={(e) =>
-                setProfile((prev) => ({
-                  ...prev,
-                  graduationYear: parseInt(e.target.value),
-                }))
-              }
-            />
-            <Field
-              title="Company Name"
-              description={currentUser?.data?.companyName}
-              editMode={editMode}
-              value={profile?.companyName}
-              onChange={(e) =>
-                setProfile((prev) => ({ ...prev, companyName: e.target.value }))
-              }
-            />
-            <Field
-              title="Company Position"
-              description={currentUser?.data?.companyPos}
-              editMode={editMode}
-              value={profile?.companyPos}
-              onChange={(e) =>
-                setProfile((prev) => ({ ...prev, companyPos: e.target.value }))
-              }
-            />
-            <Field
-              title="Employment Type"
-              description={currentUser?.data?.employmentType}
-              editMode={editMode}
-              value={profile?.employmentType}
-              onChange={(e) =>
-                setProfile((prev) => ({
-                  ...prev,
-                  employmentType: e.target.value,
-                }))
-              }
-            />
-            <Field
-              title="Company Location"
-              description={currentUser?.data?.companyLocation}
-              editMode={editMode}
-              value={profile?.companyLocation}
-              onChange={(e) =>
-                setProfile((prev) => ({
-                  ...prev,
-                  companyLocation: e.target.value,
-                }))
-              }
-            />
-            <Field
-              title="Company Start Date"
-              description={
-                currentUser?.data?.companyStartDate
-                  ? new Intl.DateTimeFormat("en-GB", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    }).format(new Date(currentUser?.data?.companyStartDate))
-                  : "N/A"
-              }
-              editMode={editMode}
-              value={profile?.companyStartDate}
-              onChange={(e) =>
-                setProfile((prev) => ({
-                  ...prev,
-                  companyStartDate: e.target.value,
-                }))
-              }
-            />
-            <Field
-              title="Is Currently Working"
-              description={`${
-                currentUser?.data?.isCurrentlyWorking ? "Yes" : "No"
-              }`}
-              editMode={editMode}
-              value={profile?.isCurrentlyWorking}
-              onChange={(e) =>
-                setProfile((prev) => ({
-                  ...prev,
-                  isCurrentlyWorking: e.target.checked,
-                }))
-              }
-            />
-            {!currentUser?.data?.isCurrentlyWorking ? (
-              <Field
-                title="Company End Date"
-                description={
-                  currentUser?.data?.companyEndDate
-                    ? new Intl.DateTimeFormat("en-GB", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      }).format(new Date(currentUser?.data?.companyEndDate))
-                    : "N/A"
-                }
-                editMode={editMode}
-                value={profile?.companyEndDate}
-                onChange={(e) =>
-                  setProfile((prev) => ({
-                    ...prev,
-                    companyEndDate: e.target.value,
-                  }))
-                }
-              />
-            ) : (
-              <Field
-                title="Status"
-                description="Currently Working"
-                editMode={editMode}
-              />
-            )}
-          </div>
-          {editMode && (
-            <Button className="self-center w-24 mt-3" onClick={handleSave}>
-              Save
-            </Button>
-          )}
-        </div>
+        {!currentUser?.data?.isAdmin && (
+          <>
+            <div className="w-full flex flex-col p-5 border border-zinc-700 rounded-xl">
+              <h1 className="text-xl font-bold mb-5">Work Information</h1>
+              <div className="grid grid-cols-2 gap-7">
+                <Field
+                  title="College"
+                  description={currentUser?.data?.college}
+                  editMode={editMode}
+                  value={profile?.college}
+                  onChange={(e) =>
+                    setProfile((prev) => ({ ...prev, college: e.target.value }))
+                  }
+                />
+                <Field
+                  title="University"
+                  description={currentUser?.data?.university}
+                  editMode={editMode}
+                  value={profile?.university}
+                  onChange={(e) =>
+                    setProfile((prev) => ({
+                      ...prev,
+                      university: e.target.value,
+                    }))
+                  }
+                />
+                <Field
+                  title="Graduation Year"
+                  description={currentUser?.data?.graduationYear}
+                  editMode={editMode}
+                  value={profile?.graduationYear}
+                  onChange={(e) =>
+                    setProfile((prev) => ({
+                      ...prev,
+                      graduationYear: parseInt(e.target.value),
+                    }))
+                  }
+                />
+                {currentUser?.data?.isAlumni && (
+                  <>
+                    <Field
+                      title="Company Name"
+                      description={currentUser?.data?.companyName}
+                      editMode={editMode}
+                      value={profile?.companyName}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          companyName: e.target.value,
+                        }))
+                      }
+                    />
+                    <Field
+                      title="Company Position"
+                      description={currentUser?.data?.companyPos}
+                      editMode={editMode}
+                      value={profile?.companyPos}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          companyPos: e.target.value,
+                        }))
+                      }
+                    />
+                    <Field
+                      title="Employment Type"
+                      description={currentUser?.data?.employmentType}
+                      editMode={editMode}
+                      value={profile?.employmentType}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          employmentType: e.target.value,
+                        }))
+                      }
+                    />
+                    <Field
+                      title="Company Location"
+                      description={currentUser?.data?.companyLocation}
+                      editMode={editMode}
+                      value={profile?.companyLocation}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          companyLocation: e.target.value,
+                        }))
+                      }
+                    />
+                    <Field
+                      title="Company Start Date"
+                      description={
+                        currentUser?.data?.companyStartDate
+                          ? new Intl.DateTimeFormat("en-GB", {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            }).format(
+                              new Date(currentUser?.data?.companyStartDate)
+                            )
+                          : "N/A"
+                      }
+                      editMode={editMode}
+                      value={profile?.companyStartDate}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          companyStartDate: e.target.value,
+                        }))
+                      }
+                    />
+                    <Field
+                      title="Is Currently Working"
+                      description={`${
+                        currentUser?.data?.isCurrentlyWorking ? "Yes" : "No"
+                      }`}
+                      editMode={editMode}
+                      value={profile?.isCurrentlyWorking}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          isCurrentlyWorking: e.target.checked,
+                        }))
+                      }
+                    />
+                    {!currentUser?.data?.isCurrentlyWorking ? (
+                      <Field
+                        title="Company End Date"
+                        description={
+                          currentUser?.data?.companyEndDate
+                            ? new Intl.DateTimeFormat("en-GB", {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                              }).format(
+                                new Date(currentUser?.data?.companyEndDate)
+                              )
+                            : "N/A"
+                        }
+                        editMode={editMode}
+                        value={profile?.companyEndDate}
+                        onChange={(e) =>
+                          setProfile((prev) => ({
+                            ...prev,
+                            companyEndDate: e.target.value,
+                          }))
+                        }
+                      />
+                    ) : (
+                      <Field
+                        title="Status"
+                        description="Currently Working"
+                        editMode={editMode}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+              {editMode && (
+                <Button className="self-center w-24 mt-3" onClick={handleSave}>
+                  Save
+                </Button>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
