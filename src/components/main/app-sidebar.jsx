@@ -56,11 +56,11 @@ const items = [
     url: "/home",
     icon: Home,
   },
-  // {
-  //   title: "Search",
-  //   url: "/search",
-  //   icon: Search,
-  // },
+  {
+    title: "Directory",
+    url: "/directory",
+    icon: Search,
+  },
   {
     title: "Profile",
     url: "/profile",
