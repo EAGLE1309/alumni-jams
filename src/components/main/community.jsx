@@ -25,10 +25,7 @@ const Community = () => {
         console.log(error);
       }
     };
-
-    return () => {
-      fetch();
-    };
+    fetch();
   }, [currentUser]);
 
   return (

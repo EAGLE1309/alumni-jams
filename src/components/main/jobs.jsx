@@ -27,10 +27,7 @@ const Jobs = () => {
         console.log(error);
       }
     };
-
-    return () => {
-      fetchData();
-    };
+    fetchData();
   }, [currentUser]);
 
   return (

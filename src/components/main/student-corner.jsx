@@ -28,10 +28,7 @@ const StudentCorner = () => {
         console.log(error);
       }
     };
-
-    return () => {
-      fetch();
-    };
+    fetch();
   }, [currentUser]);
 
   return (

@@ -24,10 +24,7 @@ const Home = () => {
         console.log(error);
       }
     };
-
-    return () => {
-      fetch();
-    };
+    fetch();
   }, [currentUser]);
   return (
     <section className="h-full p-4 pt-8 lg:px-8 flex flex-col lg:flex-row bg-zinc-100 dark:bg-[#0D0D0D] items-start gap-5 w-full">
